@@ -56,12 +56,32 @@ class Form extends Component
 
                     <div className="contact_form_group">
                         <label htmlFor="tel" className="contact_form_group_item">Telephone</label>
-                        <input id="tel" type="text" placeholder="+9611000000" className="contact_form_group_item" reaquired/>
+                        <input id="tel" type="text" placeholder="+9611000000" className="contact_form_group_item" required/>
+                    </div>
+
+                    <div className="contact_form_group">
+                        <label htmlFor="address" className="contact_form_group_item">Address</label>
+                        <input id="address" type="text" placeholder="City, Street, Building, Floor" className="contact_form_group_item" reaquired/>
+                    </div>
+
+                    <div className="contact_form_group">
+                        <label for="contact_area" className="contact_form_group_item">Area</label>
+                        <select id="contact_area" name="area" required>
+                            <option value=" "></option>
+                            <option value="beirut">Beirut</option>
+                            <option value="mountlebanon">Mount Lebanon</option>
+                            <option value="north">North</option>
+                            <option value="south">South</option>
+                            <option value="northbekaa">North Bekaa</option>
+                            <option value="centralbekaa">Central Bekaa</option>
+                            <option value="westbekaa">West Bekaa</option>
+                        </select>
                     </div>
 
                     <div className="contact_form_group">
                         <label for="contact_subject" className="contact_form_group_item">Subject</label>
                         <select id="contact_subject" name="subject" required>
+                            <option value=""></option>
                             <option value="quotation">Quotation</option>
                             <option value="purchase">Purchase</option>
                             <option value="question">Question</option>
@@ -75,9 +95,9 @@ class Form extends Component
 
                     <div className="contact_form_group">
                         <label htmlFor="message" className="contact_form_group_item">Message</label>
-                        <textarea id="message" rows="5" cols="25" className="contact_form_group_item"></textarea>
+                        <textarea id="message" rows="5" cols="20" className="contact_form_group_item"></textarea>
                     </div>
-                    <hr></hr>
+                    <hr id="contact_form_line"></hr>
                     <button type="submit" className="contact_submit_btn">Submit</button>
                 </form>
             </div>
