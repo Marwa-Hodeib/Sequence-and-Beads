@@ -60,17 +60,17 @@ const initializeDB = async () => {
 //  await db.run(`insert into category (category_name) VALUES('ring')`)
 
 /*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name",20000,5,1,2)`) */ 
+      values("2-2-2020","description of the item","name",20000,5,1,2)`) */  
 /*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name1",20000,5,2,1)`)   */
+      values("2-2-2020","description of the item","name1",20000,5,2,1)`) */  
 /*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
       values("2-2-2020","description of the item","name2",20000,5,1,1)`)  */
 /*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
       values("2-2-2020","description of the item","name3",20000,5,1,2)`)  */
 /*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
       values("2-2-2020","description of the item","name4",20000,5,2,1)`)   */
-/* await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name5",20000,5,1,2)`) */  
+/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name5",20000,5,1,2)`) */ 
   
 /*  await db.run(`INSERT INTO orders
       ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
@@ -707,25 +707,26 @@ const initializeDB = async () => {
 
       ////////////*********Image*************////////////
 
-      const getimage = async (orderby) => {
-        let query="select * from image";
-         switch(orderby){
-          case "product":
-            query+=" order by product_product_id";
-            break;
-          default:break;
-        }
-        try {
-          const rows = await db.all(query);
-          if (rows.length == 0) {
-            throw new Error("Image is empty!");
-          }
-          return rows;
-        } catch (err) {
-          throw new Error("Could not retrieve list of image");
-        } 
-      };
-    
+        
+  const getimage = async (orderby) => {
+    let query="select * from image";
+     switch(orderby){
+      case "product":
+        query+=" order by product_product_id";
+        break;
+      default:break;
+    }
+    try {
+      const rows = await db.all(query);
+      if (rows.length == 0) {
+        throw new Error("Image is empty!");
+      }
+      return rows;
+    } catch (err) {
+      throw new Error("Could not retrieve list of image");
+    } 
+  };
+      
        const getimageById = async (id) => {
         id=parseInt(id);
         if(!isNaN(id)){
@@ -859,31 +860,25 @@ const initializeDB = async () => {
 
   ////////////*********Product*************////////////
 
-  const getproducts = async (orderby) => {
-    let query="select * from product";console.log("ggg",query)
+  
+  const getproduct = async (orderby) => {
+    let query="select * from product";
      switch(orderby){
-      case "name":
-        query+=" order by product_name";
-        break;
-      case "category":
-        query+=" order by category_category_id";
-        break;
-      case "collection":
-        query+=" order by collection_collection_id";
+      case "product":
+        query+=" order by product_product_id";
         break;
       default:break;
     }
     try {
-      const rows = await db.all(query);console.log(query)
+      const rows = await db.all(query);
       if (rows.length == 0) {
-        throw new Error("product is empty!");
+        throw new Error("Image is empty!");
       }
       return rows;
     } catch (err) {
       throw new Error("Could not retrieve list of image");
     } 
   };
-
    /* const getimageById = async (id) => {
     id=parseInt(id);
     if(!isNaN(id)){
@@ -1061,7 +1056,7 @@ const initializeDB = async () => {
     deleteImageByProduct,
     createImage,
     updateImage,
-    getproducts
+    getproduct
 
   }
   return controller;

@@ -441,7 +441,6 @@ app.get("/image/update/:ID",async (req,res,next)=>{
 });
 
 
-};
 
 ///////////**********Product Table**********//////////////
 
@@ -450,12 +449,13 @@ app.get("/image/update/:ID",async (req,res,next)=>{
   app.get("/product", async (req, res,next) => {
     const {orderBy}=req.query;
     try{
-    const result = await controller.getproducts(orderBy);
+    const result = await controller.getproduct(orderBy);
     res.json({ success: true, result });
     } catch (err) {
       next(err);
     }
   });
+
   /* app.get("/image/id/:id", async (req, res,next) => {
     try{
     const result = await controller.getimageById(req.params.id);
@@ -541,4 +541,5 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("port 8080");
 });
+}
 start();
