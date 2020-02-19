@@ -1,20 +1,45 @@
 import React from "react";
 import "./modalWindow.css";
-import image from "./img/img1.jpg";
+import image1 from "./img/cat-cloning_resize_md.jpg";
+import image2 from "./img/220px-White_Persian_Cat.jpg";
+import image3 from "./img/img1.jpg";
 import { Button, InputGroup } from "react-bootstrap";
 export class modalWindow extends React.Component {
   state = {
-    showPrice: true
+    showPrice: true,
+    imgSrc: image1
+  };
+
+  handleMouseOver = event => {
+    console.log("hello");
+    this.setState({
+      imgSrc: event.target.src
+    });
+    console.log(this.state.imgSrc);
   };
   render() {
     return (
       <div className="modalWindow">
         <div className="modalWindow_container1">
-          <img src={image} className="modalWindow_mainImg" />
-          <div className="modalWindow_miniImgContainer">
-            <img className="modalWindow_miniImg" src="" />
-            <img className="modalWindow_miniImg" src="" />
-            <img className="modalWindow_miniImg" src="" />
+          <div className="mainImgContainer">
+            <img src={this.state.imgSrc} className="modalWindow_mainImg" />
+            <div className="modalWindow_miniImgContainer">
+              <img
+                className="modalWindow_miniImg"
+                src={image1}
+                onMouseOver={this.handleMouseOver}
+              />
+              <img
+                className="modalWindow_miniImg"
+                src={image2}
+                onMouseOver={this.handleMouseOver}
+              />
+              <img
+                className="modalWindow_miniImg"
+                src={image3}
+                onMouseOver={this.handleMouseOver}
+              />
+            </div>
           </div>
         </div>
 
@@ -59,11 +84,11 @@ export class modalWindow extends React.Component {
             <p
               class={
                 this.state.shown
-                  ? "modalWindow_priceOn"
-                  : "modalWindow_priceOff"
+                  ? "modalWindow_price modalWindow_priceOn"
+                  : "modalWindow_price modalWindow_priceOff"
               }
             >
-              50$
+              <strong>50$</strong>
             </p>
           </InputGroup.Append>
           <InputGroup.Append class="modalWindow_purshase">

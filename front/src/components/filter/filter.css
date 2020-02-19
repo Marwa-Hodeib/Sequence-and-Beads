@@ -1,17 +1,17 @@
 .filter {
   font-family: sans-serif;
 }
-.filter > .form-control {
+.form-control {
   border-color: gray;
 }
 @media only screen and (max-width: 600px) {
-  .filter > .input-group {
+  .input-group {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
   }
-  .filter > .form-control,
-  .filter > .input-group-append {
+  .form-control,
+  .input-group-append {
     width: 200px;
     margin-top: 10px;
   }
