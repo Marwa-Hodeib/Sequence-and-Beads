@@ -6,8 +6,8 @@ import Footer from "../../components/Footer/Footer";
 export default function Home(){
     return (
       < div className="home_div">
-      <Slider value="first"/>
-      <Header />
+      <Slider/>
+      <Header value="first"/>
       <Collection />
       <Footer />
      
