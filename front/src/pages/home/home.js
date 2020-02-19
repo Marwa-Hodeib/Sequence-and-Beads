@@ -5,13 +5,12 @@ import Slider from "../../components/Slider/slider";
 import Footer from "../../components/Footer/Footer";
 export default function Home(){
     return (
-      <>
+      < div className="home_div">
       <Slider value="first"/>
       <Header />
-      <Slider value="second"/>
       <Collection />
       <Footer />
      
-      </>
+      </ div>
     );
   }
