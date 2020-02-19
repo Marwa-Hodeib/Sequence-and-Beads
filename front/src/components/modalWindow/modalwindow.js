@@ -27,10 +27,6 @@ export class modalWindow extends React.Component {
               <td>good....</td>
             </tr>
             <tr>
-              <td>Price: </td>
-              <td>12$</td>
-            </tr>
-            <tr>
               <td>Quantity: </td>
               <td>12</td>
             </tr>
@@ -47,13 +43,15 @@ export class modalWindow extends React.Component {
             </tr>
           </table>
           <InputGroup.Append class="modalWindow_showPrice">
-            <Button variant="outline-success">Show Price</Button>
+            <Button variant="warning">
+              <strong>Show Price</strong>
+            </Button>
           </InputGroup.Append>
 
           <p class="modalWindow_price">50$</p>
           <InputGroup.Append class="modalWindow_purshase">
-            <Button class="modalWindow_purshase" variant="outline-success">
-              Purshase
+            <Button class="modalWindow_purshase" variant="success">
+              <strong>Purshase</strong>
             </Button>
           </InputGroup.Append>
         </div>

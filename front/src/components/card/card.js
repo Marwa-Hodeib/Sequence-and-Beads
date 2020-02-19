@@ -13,10 +13,10 @@ function Card(props) {
           <div class="card_col_div_text">
             <Button
               class="Description"
-              variant="outline-success"
+              variant="outline-light"
               onClick={() => setShow(true)}
             >
-              Purshase
+              <strong>Description</strong>
             </Button>
           </div>
         </div>
@@ -30,7 +30,7 @@ function Card(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Item Description
+            <strong>Item Description</strong>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

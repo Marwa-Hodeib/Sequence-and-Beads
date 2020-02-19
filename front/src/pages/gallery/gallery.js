@@ -9,7 +9,7 @@ import { Button, Modal } from "react-bootstrap";
 function Gallery(props) {
   return (
     <div className="gallery">
-      <Header />
+      <Header class="hello" />
       <div className="gallery_filter">
         <Filter />
       </div>
@@ -23,8 +23,8 @@ function Gallery(props) {
         <Card />
       </div>
       <div className="galleryButtonMore">
-        <Button className="More" variant="outline-success">
-          More
+        <Button className="More" variant="outline-secondary">
+          <strong>More</strong>
         </Button>
       </div>
       <Footer />
