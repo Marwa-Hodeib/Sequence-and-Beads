@@ -3,7 +3,8 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content:space-evenly;
-    align-items: center;
+    align-items: flex-start;
+    margin: 10px;
 }
 .contact_form_group
 {
@@ -16,12 +17,31 @@
 {
     margin:5px 0px 5px 1px;
 }
-#contact_subject
+#contact_subject, #contact_area
 {
     width: 212px;
     height:34px;
+    margin:5px 0px 5px 1px;
 }
 .contact_submit_btn
 {
     margin:auto;
+}
+label:first-child
+{
+    font-weight: bold;
+}
+#contact_form_line
+{
+    border:2px solid gray;
+}
+.contact_submit_btn
+{
+    opacity:1;
+    font-size:1.2em;
+    color:black;
+}
+.contact_submit_btn:hover
+{
+    background-color: rgb(85, 83, 83);
 }
