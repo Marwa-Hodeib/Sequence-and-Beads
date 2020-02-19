@@ -1,9 +1,18 @@
-@media only screen and (max-width: 600px) {
-  .filter_inputGroop {
-    display: flex;
-    flex-direction: column;
-  }
-}
 .filter {
   font-family: sans-serif;
+}
+@media only screen and (max-width: 600px) {
+  .input-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .form-control,
+  .input-group-append {
+    width: 200px;
+    margin-top: 10px;
+  }
+  .filter {
+    margin: 0px;
+  }
 }

@@ -10,17 +10,11 @@ function Gallery(props) {
   return (
     <div className="gallery">
       <Header />
-      <div class="gallery_filter">
+      <div className="gallery_filter">
         <Filter />
       </div>
 
-      <div class="gallery_CardsContainer">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+      <div className="gallery_CardsContainer">
         <Card />
         <Card />
         <Card />
@@ -29,7 +23,7 @@ function Gallery(props) {
         <Card />
       </div>
       <div className="galleryButtonMore">
-        <Button class="More" variant="outline-success">
+        <Button className="More" variant="outline-success">
           More
         </Button>
       </div>

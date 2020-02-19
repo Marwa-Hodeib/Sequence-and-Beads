@@ -1,5 +1,6 @@
 import React from "react";
 import "./filter";
+import "./filter.css";
 import {
   Dropdown,
   DropdownButton,
@@ -16,6 +17,7 @@ export class searchBar extends React.Component {
       <div className="filter">
         <InputGroup class="filter_inputGroop" style={{ width: "500px" }}>
           <FormControl
+            class="filter_inputText"
             placeholder="type to Search"
             aria-label="Search"
             aria-describedby="basic-addon2"
