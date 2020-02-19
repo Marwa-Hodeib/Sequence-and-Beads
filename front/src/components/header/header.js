@@ -4,10 +4,10 @@ import "./header.css";
 import Logo from "../../assets/social_media_icon/logo_1.png";
 import { Button, FormControl, Form } from "react-bootstrap";
 
-function Header() {
+function Header(props){  
   return (
-    <>
-    <div className="header_div" id="">
+     <div className="header_div" id={(props.value=="first")?"header_div_id" : ""}>
+       
         <div className="header_div_link">
           {/* <a><img src={Logo} id="header_div_logo"/></a> */}
           <a>
@@ -48,7 +48,7 @@ function Header() {
           </div>
         </div>
       </div>
-    </>
+    
   );
 }
 export default Header;

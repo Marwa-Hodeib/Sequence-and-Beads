@@ -10,12 +10,14 @@
     text-align: center;
     background: #bebcbc;
     height: 2.8em;
-    position: absolute;
-    top:11em;
-    left: 0px;
-    right:0px;
-    z-index: 10;
-
+  
+    }
+    #header_div_id{
+      position: absolute;
+      top:11em;
+      left: 7.5%;
+      right:7.5%;
+      z-index: 10;
     }
   .header_div_link{
     display:flex;

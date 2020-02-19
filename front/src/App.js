@@ -7,6 +7,12 @@ import Contact from "./pages/contact_us /contact_us";
 import Gallery from "./pages/gallery/gallery";
 
 class App extends Component {
+  // async componentDidMount() {
+  //   const response = await fetch('http://localhost:8080/contacts');
+  //   const result = await response.json();
+  //   console.log(result);
+  //   this.setState({ contacts: result, error: "none" });
+  // }
   render() {
     return (
       <div className="App">

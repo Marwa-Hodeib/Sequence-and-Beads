@@ -1,4 +1,8 @@
 .slider_carousel_image{
     height: 25em;
-    width:100%;
+    width:85%;
+    margin-top: 15px;
+}
+.carousel-control-prev-icon{
+    display: none;
 }
