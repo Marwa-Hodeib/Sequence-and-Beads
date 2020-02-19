@@ -21,12 +21,12 @@ export class searchBar extends React.Component {
             placeholder="type to Search"
             aria-label="Search"
             aria-describedby="basic-addon2"
-            variant="outline-success"
+            variant="outline-secondary"
           />
 
           <DropdownButton
             as={InputGroup.Append}
-            variant="outline-success"
+            variant="outline-secondary"
             title="Collection"
             id="input-group-dropdown-2"
           >
@@ -38,7 +38,7 @@ export class searchBar extends React.Component {
           </DropdownButton>
           <DropdownButton
             as={InputGroup.Append}
-            variant="outline-success"
+            variant="outline-secondary"
             title="Category"
             id="input-group-dropdown-2"
           >
@@ -49,7 +49,7 @@ export class searchBar extends React.Component {
             <Dropdown.Item href="#">Separated link</Dropdown.Item>
           </DropdownButton>
           <InputGroup.Append>
-            <Button variant="outline-success">Button</Button>
+            <Button variant="outline-secondary">Button</Button>
           </InputGroup.Append>
         </InputGroup>
       </div>

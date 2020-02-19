@@ -1,3 +1,7 @@
+.hello {
+  position: absolute;
+  top: 0px;
+}
 .gallery {
   margin: auto;
   font-family: sans-serif;
