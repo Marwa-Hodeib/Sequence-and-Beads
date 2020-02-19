@@ -3,7 +3,9 @@ import "./modalWindow.css";
 import image from "./img/img1.jpg";
 import { Button, InputGroup } from "react-bootstrap";
 export class modalWindow extends React.Component {
-  state = {};
+  state = {
+    showPrice: true
+  };
   render() {
     return (
       <div className="modalWindow">
@@ -19,23 +21,23 @@ export class modalWindow extends React.Component {
         <div className="modalWindow_container2">
           <table>
             <tr>
-              <td>Name: </td>
+              <th>Name: </th>
               <td>item1</td>
             </tr>
             <tr>
-              <td>Description: </td>
+              <th>Description: </th>
               <td>good....</td>
             </tr>
             <tr>
-              <td>Quantity: </td>
+              <th>Quantity: </th>
               <td>12</td>
             </tr>
             <tr>
-              <td>Category: </td>
+              <th>Category: </th>
               <td>aaa</td>
             </tr>
             <tr>
-              <td>Collection: </td>
+              <th>Collection: </th>
               <td>bbb</td>
             </tr>
             <tr>
@@ -43,12 +45,27 @@ export class modalWindow extends React.Component {
             </tr>
           </table>
           <InputGroup.Append class="modalWindow_showPrice">
-            <Button variant="warning">
+            <Button
+              variant="warning"
+              class={
+                this.state.shown
+                  ? "modalWindow_priceOff"
+                  : "modalWindow_priceOn"
+              }
+              onClick={() => this.setState({ shown: !this.state.shown })}
+            >
               <strong>Show Price</strong>
             </Button>
+            <p
+              class={
+                this.state.shown
+                  ? "modalWindow_priceOn"
+                  : "modalWindow_priceOff"
+              }
+            >
+              50$
+            </p>
           </InputGroup.Append>
-
-          <p class="modalWindow_price">50$</p>
           <InputGroup.Append class="modalWindow_purshase">
             <Button class="modalWindow_purshase" variant="success">
               <strong>Purshase</strong>

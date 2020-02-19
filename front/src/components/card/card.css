@@ -11,6 +11,7 @@
 }
 .card_col1 img {
   max-width: 17rem;
+  padding: 10px;
 }
 .card_col1 .card_col_image {
   display: block;
@@ -62,4 +63,5 @@
 .card {
   margin: 16px;
   font-family: sans-serif;
+  border: 0px transparent none;
 }
