@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
-import Image1 from "../../assets/images/image6-1.jpg";
-import Image2 from "../../assets/images/image6-2.jpg";
-import Image3 from "../../assets/images/image2-1.jpeg";
-import Image4 from "../../assets/images/image4-1.jpg";
-import Image5 from "../../assets/images/image4-2.jpg";
+import Image1 from "../../assets/images/image1.jpg";
+import Image2 from "../../assets/images/image2.jpg";
+import Image3 from "../../assets/images/image3.jpg";
 import "../../App.css"
 import "./slider.css"
 class Slider extends Component{
   constructor() {
     super();
     this.state = {
-      list1:[Image1,Image4],
+      list1:[Image1,Image2,Image3],
     }
   }
   render(){
