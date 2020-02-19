@@ -441,7 +441,6 @@ app.get("/image/update/:ID",async (req,res,next)=>{
 });
 
 
-};
 
 ///////////**********Product Table**********//////////////
 
@@ -450,24 +449,42 @@ app.get("/image/update/:ID",async (req,res,next)=>{
   app.get("/product", async (req, res,next) => {
     const {orderBy}=req.query;
     try{
-    const result = await controller.getproducts(orderBy);
+    const result = await controller.getproduct(orderBy);
     res.json({ success: true, result });
     } catch (err) {
       next(err);
     }
   });
-  /* app.get("/image/id/:id", async (req, res,next) => {
+
+   app.get("/product/id/:id", async (req, res,next) => {
     try{
-    const result = await controller.getimageById(req.params.id);
+    const result = await controller.getproductById(req.params.id);
     res.json({sucess:true,result});
     }catch(err){
       next(err);
     }
     
   });
-  app.get("/image/product/:ID", async (req, res,next)=> {
+  app.get("/product/name/:ID", async (req, res,next)=> {
     try{
-    const result = await controller.getimageByProductId(req.params.ID);
+    const result = await controller.getproductByName(req.params.ID);
+    res.json(result);
+    }catch(err){
+      next(err);
+    }
+  });
+  app.get("/product/category/:ID", async (req, res,next)=> {
+    try{
+    const result = await controller.getproductByCategory(req.params.ID);
+    res.json(result);
+    }catch(err){
+      next(err);
+    }
+  });
+
+  app.get("/product/collection/:ID", async (req, res,next)=> {
+    try{
+    const result = await controller.getproductByCollection(req.params.ID);
     res.json(result);
     }catch(err){
       next(err);
@@ -477,30 +494,39 @@ app.get("/image/update/:ID",async (req,res,next)=>{
   //////////////////Delete
 
 
-app.get("/image/delete/id/:ID",async(req,res,next)=>{
+app.get("/product/delete/id/:ID",async(req,res,next)=>{
   try{
   const result = await
-  controller.deleteImageByID(req.params.ID);
-  res.json(result);
-  }catch(err){
-    next(err);
-  }
-})
-  
-app.get("/image/delete/name/:name", async (req,res,next)=> {
-  try{
-  const result = await
-  controller.deleteImageByName (req.params.name);
+  controller.deleteProductByID(req.params.ID);
   res.json(result);
   }catch(err){
     next(err);
   }
 })
 
-app.get("/image/delete/product/:product", async (req,res,next)=> {
+app.get("/product/delete/name/:name", async (req,res,next)=> {
   try{
   const result = await
-  controller.deleteImageByProduct (req.params.product);
+  controller.deleteProductByName (req.params.name);
+  res.json(result);
+  }catch(err){
+    next(err);
+  }
+})
+
+app.get("/product/delete/collection/:product", async (req,res,next)=> {
+  try{
+  const result = await
+  controller.deleteProductByCollection (req.params.product);
+  res.json(result);
+  }catch(err){
+    next(err);
+  }
+})
+app.get("/product/delete/category/:product", async (req,res,next)=> {
+  try{
+  const result = await
+  controller.deleteProductByCategory (req.params.product);
   res.json(result);
   }catch(err){
     next(err);
@@ -510,10 +536,10 @@ app.get("/image/delete/product/:product", async (req,res,next)=> {
 
 ////////Create
 
-app.get("/image/create/",async (req,res,next)=>{
+app.get("/product/create/",async (req,res,next)=>{
   try{
   const result = await 
-  controller.createImage(req.query);
+  controller.createProduct(req.query);
   res.json(result);
   }catch(err){
     next(err);
@@ -521,7 +547,7 @@ app.get("/image/create/",async (req,res,next)=>{
 });
 
 ///////////update
-
+/*
 app.get("/image/update/:ID",async (req,res,next)=>{
   try{
   const result = await 
@@ -541,4 +567,5 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("port 8080");
 });
+}
 start();
