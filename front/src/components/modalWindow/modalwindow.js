@@ -52,7 +52,9 @@ export class modalWindow extends React.Component {
 
           <p class="modalWindow_price">50$</p>
           <InputGroup.Append class="modalWindow_purshase">
-            <Button variant="outline-success">Purshase</Button>
+            <Button class="modalWindow_purshase" variant="outline-success">
+              Purshase
+            </Button>
           </InputGroup.Append>
         </div>
       </div>

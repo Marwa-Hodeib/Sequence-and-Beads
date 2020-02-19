@@ -1,5 +1,4 @@
 .gallery {
-  height: 100%;
   margin: auto;
   font-family: sans-serif;
 }
@@ -12,6 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  min-height: 243px;
 }
 .gallery_filter {
   margin-top: 50px;
@@ -26,4 +26,13 @@
   width: 100%;
   margin-top: 25px;
   margin-bottom: 25px;
+}
+@media only screen and (max-width: 600px) {
+  gallery {
+    margin: 0px;
+  }
+  .gallery_CardsContainer {
+    width: 100%;
+    margin: 0px;
+  }
 }
