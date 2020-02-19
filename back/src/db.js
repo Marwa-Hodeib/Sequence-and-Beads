@@ -1,22 +1,23 @@
 import sqlite from "sqlite";
 
 const initializeDB = async () => {
-  const db = await sqlite.open("./database.sqlite");
-/*    await db.run(`CREATE TABLE admin (
+  const db = await sqlite.open("./db.sqlite");
+/*     await db.run(`CREATE TABLE admin (
         admin_id integer NOT NULL CONSTRAINT admin_pk PRIMARY KEY,
         admin_user text NOT NULL UNIQUE,
         admin_pass text NOT NULL
-      );`)  */ 
-/*    await db.run(`CREATE TABLE category (
+      );`) */   
+/*     await db.run(`CREATE TABLE category (
         category_id integer NOT NULL CONSTRAINT category_pk PRIMARY KEY,
         category_name text NOT NULL UNIQUE
-      );`)  */ 
-/*    await db.run(`CREATE TABLE collection (
+      );`) */   
+/*     await db.run(`CREATE TABLE collection (
         collection_id integer NOT NULL CONSTRAINT collection_pk PRIMARY KEY,
         collection_name text NOT NULL UNIQUE,
-        collection_flag integer NOT NULL
-      );`)  */ 
-/*    await db.run(`CREATE TABLE product (
+        collection_flag integer NOT NULL,
+        collection_image text NOT NULL
+      );`) */   
+/*     await db.run(`CREATE TABLE product (
         product_id integer NOT NULL CONSTRAINT product_pk PRIMARY KEY,
         product_name text NOT NULL UNIQUE,
         product_description text NOT NULL,
@@ -29,15 +30,15 @@ const initializeDB = async () => {
         REFERENCES category (category_id),
         CONSTRAINT product_collection FOREIGN KEY (collection_collection_id)
         REFERENCES collection (collection_id)
-      );`)    */
-/*    await db.run(`CREATE TABLE image (
+      );`) */    
+/*     await db.run(`CREATE TABLE image (
         image_id integer NOT NULL CONSTRAINT image_pk PRIMARY KEY,
         product_product_id integer NOT NULL,
         image_name text NOT NULL,
         CONSTRAINT image_product FOREIGN KEY (product_product_id)
         REFERENCES product (product_id)
-      );`)  */   
-/*    await db.run(`CREATE TABLE orders (
+      );`) */     
+/*     await db.run(`CREATE TABLE orders (
         orders_id integer NOT NULL CONSTRAINT order_pk PRIMARY KEY,
         orders_date text NOT NULL,
         orders_quantity integer NOT NULL,
@@ -47,37 +48,37 @@ const initializeDB = async () => {
         area text NOT NULL,
         CONSTRAINT order_product FOREIGN KEY (product_product_id)
         REFERENCES product (product_id)
-      );`) */   
+      );`) */    
   
-//  await db.run(`insert into collection (collection_name,collection_flag) values ('summer',1);`)
-//  await db.run(`insert into collection (collection_name,collection_flag) values ('winter',0);`)
-//  await db.run(`insert into collection (collection_name,collection_flag) values ('autumn',0);`)
-//  await db.run(`insert into collection (collection_name,collection_flag) values ('spring',0);`)
+//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('summer',1,'1.png');`)
+//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('winter',0,'2.png');`)
+//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('autumn',0,'3.jpg');`)
+// await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('spring',0,'4.jpeg');`)
 
 //  await db.run(`insert into admin (admin_user,admin_pass) values ('admin','admin');`)
 
 //  await db.run(`insert into category (category_name) VALUES('bracelet')`)
 //  await db.run(`insert into category (category_name) VALUES('ring')`)
 
-/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name",20000,5,1,2)`) */  
-/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name1",20000,5,2,1)`) */  
-/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name2",20000,5,1,1)`)  */
-/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name3",20000,5,1,2)`)  */
-/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name4",20000,5,2,1)`)   */
-/*  await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name5",20000,5,1,2)`) */ 
+/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name",20000,5,1,2)`) */   
+/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name1",20000,5,2,1)`) */   
+/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name2",20000,5,1,1)`) */  
+/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name3",20000,5,1,2)`) */  
+/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name4",20000,5,2,1)`) */   
+/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name5",20000,5,1,2)`) */  
   
-/*  await db.run(`INSERT INTO orders
+/*   await db.run(`INSERT INTO orders
       ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
-       VALUES ('2-2-2020', 2, 20000, 1, 'joe', 'beirut'); `)  */
-/*  await db.run(`INSERT INTO orders
-       ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
-      VALUES ('2-1-2020', 2, 20000, 2, 'najwa', 'zahle'); `)   */
+       VALUES ('2-2-2020', 2, 20000, 1, 'joe', 'beirut'); `) */  
+  /*   await db.run(`INSERT INTO orders
+        ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
+        VALUES ('2-1-2020', 2, 20000, 2, 'najwa', 'zahle'); `) */   
 
 //   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'1.png')`)
 //   await db.run(`insert into image ("product_product_id" ,"image_name") values (2,'2.png')`)
@@ -865,30 +866,36 @@ const initializeDB = async () => {
     let query="select * from product";
      switch(orderby){
       case "product":
-        query+=" order by product_product_id";
+        query+=" order by product_name";
+        break;
+      case "category":
+        query+=" order by category_category_id";
+        break;
+      case "collection":
+        query+=" order by collection_collection_id";
         break;
       default:break;
     }
     try {
       const rows = await db.all(query);
       if (rows.length == 0) {
-        throw new Error("Image is empty!");
+        throw new Error("product is empty!");
       }
       return rows;
     } catch (err) {
-      throw new Error("Could not retrieve list of image");
+      throw new Error("Could not retrieve list of product");
     } 
   };
-   /* const getimageById = async (id) => {
+    const getproductById = async (id) => {
     id=parseInt(id);
     if(!isNaN(id)){
       try{
-        const rows = await db.all(`select * from image where image_id =${id} `);
+        const rows = await db.all(`select * from product where product_id =${id} `);
         if(rows.length>0){
         return rows;
         }
         else if(rows.length==0){
-          throw new Error(`Image with id=${id} is not found`)
+          throw new Error(`Product with id=${id} is not found`)
         }
         }catch(err){
           throw new Error(`Can't retreive data`)
@@ -900,25 +907,65 @@ const initializeDB = async () => {
    
   };
 
- const getimageByProductId = async(id) =>{
+const getproductByName = async(id) =>{
     try{
-    const rows =  await db.all(`select * from image where product_product_id = ${id}`);
+    const rows =  await db.all(`select * from product where product_name = '${id}'`);
     if(rows.length>0){
       return rows;
     }
     else{
-      throw new Error(`Image with Product_id=${id} is not found`)
+      throw new Error(`Product with Product_id=${id} is not found`)
     }
     }catch(err){
       throw new Error(`Can't retrieve data`)
     }
   }
+  const getproductByCategory = async (id) => {
+    id=parseInt(id);
+    if(!isNaN(id)){
+      try{
+        const rows = await db.all(`select * from product where category_category_id =${id} `);
+        if(rows.length>0){
+        return rows;
+        }
+        else if(rows.length==0){
+          throw new Error(`Product with id=${id} is not found`)
+        }
+        }catch(err){
+          throw new Error(`Can't retreive data`)
+        }
+      }
+    else{
+      throw new Error(`Enter id as a number`)
+    }
+   
+  };
+  const getproductByCollection = async (id) => {
+    id=parseInt(id);
+    if(!isNaN(id)){
+      try{
+        const rows = await db.all(`select * from product where collection_collection_id =${id} `);
+        if(rows.length>0){
+        return rows;
+        }
+        else if(rows.length==0){
+          throw new Error(`Product with id=${id} is not found`)
+        }
+        }catch(err){
+          throw new Error(`Can't retreive data`)
+        }
+      }
+    else{
+      throw new Error(`Enter id as a number`)
+    }
+   
+  };
 
-  const deleteImageByID = async(id) =>{
+  const deleteProductByID = async(id) =>{
     id=parseInt(id);
     if(!isNaN(id)){
       try{ 
-        const rows = await db.run(`delete from image where image_id=${id}`);
+        const rows = await db.run(`delete from product where product_id=${id}`);
         if(rows.stmt.changes>0){
           return true;
          }
@@ -934,9 +981,9 @@ const initializeDB = async () => {
    
   }
 
- const deleteImageByName = async (name) =>{
+ const deleteProductByName = async (name) =>{
     try{
-      const rows = await db.run (`delete from image where image_name='${name}'`);
+      const rows = await db.run (`delete from product where product_name='${name}'`);
       if(rows.stmt.changes>0){
         return true;
       }
@@ -945,10 +992,9 @@ const initializeDB = async () => {
       catch{
       throw new Error("not found");}
     }
-
-    const deleteImageByProduct = async (id) =>{
+    const deleteProductByCollection = async (name) =>{
       try{
-        const rows = await db.run (`delete from image where product_product_id=${id}`);
+        const rows = await db.run (`delete from product where category_category_id=${name}`);
         if(rows.stmt.changes>0){
           return true;
         }
@@ -957,16 +1003,32 @@ const initializeDB = async () => {
         catch{
         throw new Error("not found");}
       }
+      const deleteProductByCategory = async (name) =>{
+        try{
+          const rows = await db.run (`delete from product where category_category_id=${name}`);
+          if(rows.stmt.changes>0){
+            return true;
+          }
+          else 
+          return false;}
+          catch{
+          throw new Error("not found");}
+        }
 
-    const createImage = async (props) =>{
-      let {name,productID}=props;
-      productID=parseInt(productID);
-      if(name && productID && !isNaN(productID)){
+
+    const createProduct = async (props) =>{
+      let {name,description,price,quantity,date,categoryID,collectionID}=props;
+      price=parseInt(price);
+      quantity=parseInt(quantity);
+      categoryID=parseInt(categoryID);
+      collectionID=parseInt(collectionID);////
+      if(name && description && price && quantity && date && categoryID && collectionID && !isNaN(price) && !isNaN(quantity) && !isNaN(collectionID) && !isNaN(categoryID)){
           try{
-            const id = await db.all (`select * from product where product_id=${productID}`);
-            if(id.length>0){
+            const collValue = await db.all (`select * from collection where collection_id=${collectionID}`);
+            const catValue = await db.all (`select * from category where category_id=${categoryID}`);
+            if(collValue.length>0 && catValue.length>0){
               try{
-              const rows = await db.run (`insert into image (image_name,product_product_id) values ('${name}',${productID})`);
+              const rows = await db.run (`insert into product (product_name,product_description,product_price,product_quantity,product_date,category_category_id,collection_collection_id) values ('${name}','${description}',${price},${quantity},'${date}',${categoryID},${collectionID})`);
               return rows.stmt.lastID;
             }catch{
               throw new Error("can't insert into Image table");
@@ -980,7 +1042,7 @@ const initializeDB = async () => {
     }
   }
 }
-
+/*
     const updateImage = async (id,props) =>{
       let {name,productID}=props;
       let query="";
@@ -1056,7 +1118,16 @@ const initializeDB = async () => {
     deleteImageByProduct,
     createImage,
     updateImage,
-    getproduct
+    getproduct,
+    getproductById,
+    getproductByName,
+    getproductByCategory,
+    getproductByCollection,
+    deleteProductByID,
+    deleteProductByName,
+    deleteProductByCategory,
+    deleteProductByCollection,
+    createProduct
 
   }
   return controller;
