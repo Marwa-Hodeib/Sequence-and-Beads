@@ -6,6 +6,7 @@ import image4 from '../../assets/photos/ghada.png';
 
 
 
+
 function AboutBox (){
   return (
     <>
