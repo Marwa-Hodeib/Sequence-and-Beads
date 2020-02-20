@@ -16,7 +16,7 @@ class Slider extends Component{
   render(){
     return(
     <>
-     <Carousel interval={2500} pauseOnHover={false} touch={false} indicators={false} wrap={true} animation={false} pauseOnVisibility={false}  prevIcon={<span aria-hidden="true" className="carousel-control-prev-icon" />}>
+     <Carousel interval={2500} pauseOnHover={false} touch={true} indicators={false} wrap={true} animation={false} pauseOnVisibility={false}  prevIcon={<span aria-hidden="true" className="carousel-control-prev-icon" />}>
 
      {this.state.list1.map((task, index) => 
               <Carousel.Item>

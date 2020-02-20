@@ -3,8 +3,12 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content:space-evenly;
-    align-items: flex-start;
-    margin: 10px;
+    align-items: flex-end;
+    background-image: url("../../assets/images/background_contact.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1% 0% 1% 0%;
+    
 }
 .contact_form_group
 {
@@ -12,10 +16,11 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    
 }
 .contact_form_group_item
 {
-    margin:5px 0px 5px 1px;
+    margin:5px 0px 5px 0px;
 }
 #contact_subject, #contact_area
 {
@@ -33,7 +38,7 @@ label:first-child
 }
 #contact_form_line
 {
-    border:2px solid gray;
+    border:2px solid white;
 }
 .contact_submit_btn
 {
@@ -44,4 +49,17 @@ label:first-child
 .contact_submit_btn:hover
 {
     background-color: rgb(85, 83, 83);
+}
+#contact_form_container
+{
+    margin-right:10%;
+}
+.contact_body_container h1
+{
+    margin-right: 14%;
+}
+.contact_body_container p
+{
+    width:300px;
+    margin-right:11%;
 }
