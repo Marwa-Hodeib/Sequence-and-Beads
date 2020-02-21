@@ -28,7 +28,7 @@ const start = async () => {
   app.get("/collection/id/:id", async (req, res,next) => {
     try{
     const result = await controller.getcollectionById(req.params.id);
-    res.json({sucess:true,result});
+    res.json({success:true,result});
     }catch(err){
       next(err);
     }
@@ -37,7 +37,15 @@ const start = async () => {
   app.get("/collection/name/:name", async (req, res,next)=> {
     try{
     const result = await controller.getcollectionByName(req.params.name);
-    res.json(result);
+    res.json({success:true,result});
+    }catch(err){
+      next(err);
+    }
+  });
+  app.get("/collection/flag/:name", async (req, res,next)=> {
+    try{
+    const result = await controller.getcollectionByFlag(req.params.name);
+    res.json({success:true,result});
     }catch(err){
       next(err);
     }
