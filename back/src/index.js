@@ -1,9 +1,9 @@
 import express from "express";
 import db from "./db";
 import initializeDB from "./db";
-
+import cors from 'cors';
 const app = express();
-
+app.use(cors());
 const start = async () => {
   const controller = await initializeDB();
 
