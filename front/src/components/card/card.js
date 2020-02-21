@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./card.css";
-import Image1 from "./img/img1.jpg";
+import Image1 from "./img/Thinking-of-getting-a-cat.png";
 import { Modal, Button } from "react-bootstrap";
 import ModalWindow from "../modalWindow/modalwindow";
 function Card(props) {
@@ -8,7 +8,7 @@ function Card(props) {
   return (
     <div className="card">
       <div class="card_col1">
-        <img src={Image1} alt="Mountains" class="card_col_image" />
+        <img alt="card item" src={Image1} class="card_col_image" />
         <div class="card_col_div">
           <div class="card_col_div_text">
             <Button

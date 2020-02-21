@@ -6,6 +6,7 @@ import About from "./pages/about/about";
 import Contact from "./pages/contact_us /contact_us";
 import Gallery from "./pages/gallery/gallery";
 
+
 class App extends Component {
     constructor(props) {
       super(props);

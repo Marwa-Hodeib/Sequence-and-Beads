@@ -34,7 +34,7 @@ class Form extends Component
     {
         return (
             <div className="contact_body_container">
-                <h1>Contact Form</h1>
+                <h1>Contact Us</h1>
                 <p>Please fill in your information and we'll be sending your order in no time!</p>
 
                 <form id="contact_form_container" /*onSubmit={this.handleSubmit.bind(this)}*/ method="POST">
