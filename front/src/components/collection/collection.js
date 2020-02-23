@@ -34,7 +34,7 @@ export default class Collection extends React.Component {
              <img src={(this.state.flag==1)?require('../../assets/images/'+this.state.collection_id[0].collection_image):""} alt="no"  className="collection_row1_image"/>
              <div className="collection_row1_div">
                <div className="collection_row1_div_text">
-                 <h2>Desrcription</h2>
+                 <h2>{(this.state.flag==1)?this.state.collection_id[0].collection_name:""}</h2>
                </div>
              </div>
            </div>
@@ -44,7 +44,7 @@ export default class Collection extends React.Component {
                <img src={(this.state.flag==1)?this.handleimage(this.state.product[0]):""} alt="no" className="collection_row2_1_image1"/>
                <div className="collection_row2_1_div">
                  <div className="collection_row2_1_div_text">
-                   <h2>Description</h2>
+                   <h2>{(this.state.flag==1)?this.state.product[0].product_description:""}</h2>
                  </div>
                </div>
               </div>
@@ -52,7 +52,7 @@ export default class Collection extends React.Component {
                 <img src={(this.state.flag==1)?this.handleimage(this.state.product[1]):"never"}  alt="Mountains" className="collection_row2_1_image"/>
                 <div className="collection_row2_1_div">
                  <div className="collection_row2_1_div_text">
-                   <h2>Description</h2>
+                   <h2>{(this.state.flag==1)?this.state.product[1].product_description:""}</h2>
                  </div>
                </div>
               </div>
@@ -61,7 +61,7 @@ export default class Collection extends React.Component {
               <img src={(this.state.flag==1)?this.handleimage(this.state.product[2]):""}  alt="Mountains" className="collection_column_image" /> 
               <div className="collection_row2_1_div">
                  <div className="collection_row2_1_div_text">
-                   <h2>Description</h2>
+                 <h2>{(this.state.flag==1)?this.state.product[2].product_description:""}</h2>
                  </div>
                </div>
             </div>
