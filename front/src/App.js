@@ -9,15 +9,19 @@ import Gallery from "./pages/gallery/gallery";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [] };
+    this.state = {
+      collection: [],
+      collectionID: [],
+      product: []
+    };
   }
 
   getCollectionList = async () => {
     try {
-      const response = await fetch("http://localhost:8080/product");
+      const response = await fetch("http://localhost:8080/collection");
       const result = await response.json();
       if (result.success) {
-        this.setState({ products: result, error: "" });
+        this.setState({ collection: result.result, error: "" });
       } else {
         this.setState({ error: result.message });
       }
@@ -25,8 +29,37 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
+  getCollectionFlag = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/collection/flag/1");
+      const result = await response.json();
+      if (result.success) {
+        this.setState({ collectionID: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
+  getproductList = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/product");
+      const result = await response.json();
+      if (result.success) {
+        this.setState({ product: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
+
   async componentDidMount() {
     this.getCollectionList();
+    this.getCollectionFlag();
+    this.getproductList();
   }
 
   render() {
@@ -35,10 +68,23 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route path="/" component={Home} exact />
+              <Route
+                exact
+                path="/"
+                component={() => (
+                  <Home
+                    collectionID={this.state.collectionID}
+                    collection={this.state.collection}
+                    product={this.state.product}
+                  />
+                )}
+              />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route path="/gallery" component={Gallery} />
+              <Route
+                path="/gallery"
+                component={() => <Gallery test={this.state.collection} />}
+              />
             </Switch>
           </div>
         </BrowserRouter>

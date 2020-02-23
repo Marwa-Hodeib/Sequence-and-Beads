@@ -13,7 +13,7 @@ function Gallery(props) {
       <div className="gallery_filter">
         <Filter />
       </div>
-
+    {console.log(props.test)}
       <div className="gallery_CardsContainer">
         <Card />
         <Card />

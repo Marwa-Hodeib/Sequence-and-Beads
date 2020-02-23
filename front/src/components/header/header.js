@@ -7,9 +7,7 @@ import { Button, FormControl, Form } from "react-bootstrap";
 function Header(props){  
   return (
      <div className="header_div" id={(props.value=="first")?"header_div_id" : ""}>
-       
         <div className="header_div_link">
-          {/* <a><img src={Logo} id="header_div_logo"/></a> */}
           <a>
             <span>
               <NavLink to="/" className="header_navlink">

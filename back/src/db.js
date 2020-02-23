@@ -142,6 +142,22 @@ const initializeDB = async () => {
       throw new Error(`Can't retrieve data`)
     }
   }
+  const getcollectionByFlag = async(flag) =>{
+    flag=parseInt(flag);
+    if(!isNaN(flag)){
+    try{
+    const rows =  await db.all(`select * from collection where collection_flag = ${flag}`);
+    if(rows.length>0){
+      return rows;
+    }
+    else{
+      throw new Error(`Collection with name=${name} is not found`)
+    }
+    }catch(err){
+      throw new Error(`Can't retrieve data`)
+    }
+  }
+  }
   
   const deleteCollectionByID = async(id) =>{
     id=parseInt(id);
@@ -1083,6 +1099,7 @@ const getproductByName = async(id) =>{
     getcollectionByName,
     deleteCollectionByID,
     deleteCollectionByName,
+    getcollectionByFlag,
     createCollection,
     updateCollection,
     getAdmin,

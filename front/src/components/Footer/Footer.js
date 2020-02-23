@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import facebook from "../../assets/social_media_icon/Facebook.png";
 import instagram from "../../assets/social_media_icon/Instagram.png";
 import whatsapp from "../../assets/social_media_icon/WhatsApp.png";
+import Logo from "../../assets/social_media_icon/logo_1.png";
 import "./Footer.css";
 
 class Footer extends Component
@@ -10,7 +11,7 @@ class Footer extends Component
     {
         return (
             <footer className="footer_container">
-                <h2 id="footer_container_h2">Sequins & Beads</h2>
+                <h2 id="footer_container_h2"><img src={Logo}/>Sequins & Beads</h2>
                 <ul className="footer_icon_container">
                     <li className="footer_icon_item"><a href="https://www.facebook.com" target="_blank"><img src={facebook} alt="facebook logo"/></a></li>
                     <li className="footer_icon_item"><a href="https://www.instagram.com" target="_blank"><img src={instagram} alt="instagram logo"/></a></li>
