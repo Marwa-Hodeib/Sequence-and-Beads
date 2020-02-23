@@ -12,8 +12,8 @@ class App extends Component {
       super(props);
       this.state = { 
         collection:[],
-        collectionID:[],
-        product:[]
+        product:[],
+        image:[]
       };
     }
 
@@ -23,19 +23,6 @@ class App extends Component {
       const result = await response.json();
       if (result.success) {
         this.setState({ collection: result.result, error: ""});
-      } else {
-        this.setState({ error: result.message });
-      }
-    } catch (err) {
-      this.setState({ error: err });
-    }
-  };
-  getCollectionFlag = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/collection/flag/1");
-      const result = await response.json();
-      if (result.success) {
-        this.setState({ collectionID: result.result, error: ""});
       } else {
         this.setState({ error: result.message });
       }
@@ -57,11 +44,24 @@ class App extends Component {
     }
   };
 
+  getimage = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/image");
+      const result = await response.json();
+      if (result.success) {
+        this.setState({ image: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
+
   async componentDidMount() {
-    this.getCollectionList();
-    this.getCollectionFlag();
-    this.getproductList();
-    
+    await this.getCollectionList();
+    await this.getproductList();
+    await this.getimage();
   }
 
   render() {
@@ -70,7 +70,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-    <Route exact path="/"  component={() => <Home  collectionID={this.state.collectionID} collection={this.state.collection}  product={this.state.product} />}/>
+              <Route exact path="/"  component={() => <Home collection={this.state.collection.filter(obj => obj.collection_flag)}  product={this.state.product} image={this.state.image}/>}/>
               <Route path="/about"  component={About} />
               <Route path="/contact" component={Contact} />
               <Route  path="/gallery" component={() => <Gallery test={this.state.collection} />} />

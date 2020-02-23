@@ -3,6 +3,8 @@ import Header from "../../components/header/header";
 import Collection from "../../components/collection/collection";
 import Slider from "../../components/Slider/slider";
 import Footer from "../../components/Footer/Footer";
+import Logo from "../../assets/social_media_icon/logo_1.png";
+import "./home.css";
 class Home extends Component {
   constructor(props){
     super(props);
@@ -10,17 +12,31 @@ class Home extends Component {
       flag:0,
       collection:[],
       product:[],
-      collectionID:[]
+      image:[]
     };
+  }
+  handlestate(){
+    if(this.props.collection.length!=0 && this.props.product.length!=0 && this.props.image.length!=0){
+      this.setState({
+        flag:1,
+        collection:this.props.collection,
+        product:this.props.product,
+        image:this.props.image
+      })
+    }
+  }
+
+  async componentDidMount() {
+     await this.handlestate();
   }
  
   render(){
     return (
       < div className="home_div">
-        {(this.state.flag==0 && this.props.collection.length!=0 && this.props.product.length!=0 && this.props.collectionID.length!=0)?this.setState({flag:1,collectionID:this.props.collectionID,collection:this.props.collection,product:this.props.product}):""}
       <Slider/>
       <Header value="first"/>
-      <Collection  collection={(this.state.flag==1)?this.state.collection:""} product={(this.state.flag==1)?this.state.product:""} collectionID={(this.state.flag==1)?this.state.collectionID:""}/>
+      <img src={Logo} id="home_logo_abs"/>
+      <Collection  collection={(this.state.flag==1)?this.state.collection:""} product={(this.state.flag==1)?this.state.product:""} image={(this.state.flag==1)?this.state.image:""}/>
       <Footer />
       </ div>
     );

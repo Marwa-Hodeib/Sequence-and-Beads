@@ -41,9 +41,8 @@
       "last 1 safari version"
     ]
   },
-
-  "rnpm":{
-    "assets":[
+  "rnpm": {
+    "assets": [
       "./assets/fonts/"
     ]
   }
