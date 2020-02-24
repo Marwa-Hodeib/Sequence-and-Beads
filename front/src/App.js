@@ -73,7 +73,7 @@ class App extends Component {
               <Route exact path="/"  component={() => <Home collection={this.state.collection.filter(obj => obj.collection_flag)}  product={this.state.product} image={this.state.image}/>}/>
               <Route path="/about"  component={About} />
               <Route path="/contact" component={Contact} />
-              <Route  path="/gallery" component={() => <Gallery test={this.state.collection} />} />
+              <Route  path="/gallery"component={() => <Gallery product={this.state.product} image={this.state.image}/>}/>
             </Switch>
           </div>
         </BrowserRouter>
