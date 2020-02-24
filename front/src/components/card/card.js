@@ -8,7 +8,7 @@ function Card(props) {
   const [show, setShow] = useState(false) 
   return (
     <div className="card"> 
-      <div class="card_col1">{props.image.length!=0?console.log("ll",props.image):""}
+      <div class="card_col1">
         <img alt="card item"  class="card_col_image" src={(props.image.length!=0)?require('../../assets/images/'+props.image[0].image_name):""}   />
         <div class="card_col_div">
           <div class="card_col_div_text">
@@ -35,7 +35,7 @@ function Card(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ModalWindow />
+           <ModalWindow image={props.image} product={props.product} category={props.category} collection={props.collection}/> 
         </Modal.Body>
       </Modal>
     </div>

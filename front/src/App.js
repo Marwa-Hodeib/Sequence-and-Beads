@@ -43,6 +43,19 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
+  getCategoryList = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/category");
+      const result = await response.json();
+      if (result.success) {
+        this.setState({ category: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
 
   getimage = async () => {
     try {
@@ -62,6 +75,7 @@ class App extends Component {
     await this.getCollectionList();
     await this.getproductList();
     await this.getimage();
+    await this.getCategoryList();
   }
 
   render() {
@@ -73,7 +87,7 @@ class App extends Component {
               <Route exact path="/"  component={() => <Home collection={this.state.collection.filter(obj => obj.collection_flag)}  product={this.state.product} image={this.state.image}/>}/>
               <Route path="/about"  component={About} />
               <Route path="/contact" component={Contact} />
-              <Route  path="/gallery"component={() => <Gallery product={this.state.product} image={this.state.image}/>}/>
+              <Route  path="/gallery"component={() => <Gallery product={this.state.product} image={this.state.image} collection={this.state.collection} category={this.state.category}/>}/>
             </Switch>
           </div>
         </BrowserRouter>

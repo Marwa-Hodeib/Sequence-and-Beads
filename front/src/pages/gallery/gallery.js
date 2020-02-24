@@ -12,23 +12,20 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      collection:[],
-      product:[],
-      image:[]
     };
   }
 
-  handleMore(){console.log("hghjghj")
-       this.props.image.map((image,index) => (
-       (index>6)?
-            (<div className="gallery_cardsContainer">
+/*   async componentDidMount() {
+     return(
+         <div className="gallery_CardsContainer">
+       {this.props.image.map((image,index) => (
+         (index>0 && index<4)?
             <Card image={this.props.image.filter(obj=> obj.product_product_id == index)}
-              product={this.props.product.filter(obj1=>obj1.product_id==index)} />
-            )){console.log("h",this.props.image[index])}
-            </div>):""));
-             
-  }
- 
+            product={this.props.product.filter(obj1=>obj1.product_id==index)} />:""
+          ))}  
+      
+    </div> )
+  } */
     render() {
       return (
     <div className="gallery">
@@ -38,16 +35,20 @@ class Gallery extends React.Component {
       </div>
       <div className="gallery_CardsContainer">
        {this.props.image.map((image,index) => (
-         (index>0 && index<4)?
+         (index>0 && index<7)?
             <Card image={this.props.image.filter(obj=> obj.product_product_id == index)}
-            product={this.props.product.filter(obj1=>obj1.product_id==index)} />:""
+            product={this.props.product.filter(obj1=>obj1.product_id==index)}
+            category={this.props.category}
+            collection={this.props.collection} />:""
           ))}  
       
-      </div>
+      </div> 
       <div className="galleryButtonMore">
-        <Button className="More" variant="outline-secondary" onClick={this.handleMore()}>
-          <strong>More</strong>
-        </Button>
+        {this.state.flag==0?
+        <Button className="More" variant="outline-secondary">
+        <strong>More</strong>
+      </Button>:""}
+        
       </div>
       <Footer />
     </div>
