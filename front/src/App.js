@@ -6,7 +6,6 @@ import About from "./pages/about/about";
 import Contact from "./pages/contact_us /contact_us";
 import Gallery from "./pages/gallery/gallery";
 
-
 class App extends Component {
     constructor(props) {
       super(props);
@@ -22,7 +21,7 @@ class App extends Component {
       const response = await fetch("http://localhost:8080/collection");
       const result = await response.json();
       if (result.success) {
-        this.setState({ collection: result.result, error: ""});
+        this.setState({ collection: result.result, error: "" });
       } else {
         this.setState({ error: result.message });
       }
@@ -95,6 +94,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
