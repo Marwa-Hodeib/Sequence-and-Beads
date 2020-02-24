@@ -3,12 +3,13 @@ import "./card.css";
 import Image1 from "./img/Thinking-of-getting-a-cat.png";
 import { Modal, Button } from "react-bootstrap";
 import ModalWindow from "../modalWindow/modalwindow";
+
 function Card(props) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false) 
   return (
-    <div className="card">
-      <div class="card_col1">
-        <img alt="card item" src={Image1} class="card_col_image" />
+    <div className="card"> 
+      <div class="card_col1">{props.image.length!=0?console.log("ll",props.image):""}
+        <img alt="card item"  class="card_col_image" src={(props.image.length!=0)?require('../../assets/images/'+props.image[0].image_name):""}   />
         <div class="card_col_div">
           <div class="card_col_div_text">
             <Button
@@ -40,4 +41,5 @@ function Card(props) {
     </div>
   );
 }
+
 export default Card;

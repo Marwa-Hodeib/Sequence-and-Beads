@@ -91,6 +91,27 @@ const initializeDB = async () => {
 
 
 ////////////*********Collection*************////////////
+
+////////////*********CREATE*************////////////
+  const createCollection = async (props) =>{
+    const {name,flag}=props;
+    if(name && flag ){
+      if(flag==1 || flag==0){
+        try{
+          const rows = await db.run (`insert into collection (collection_name,collection_flag) values ('${name}',${flag})`);
+          return rows.stmt.lastID;
+        }catch(err){
+          throw new Error("no connection to database");
+        }
+      }
+      else
+      throw new Error("enter flag 0 or 1")//flag==1 || flag==0
+    }
+    else
+    throw new Error("enter flag and name");
+
+  }
+////////////*********READ*************////////////
   const getcollection = async (orderby) => {
     let query="select * from collection";
      switch(orderby){
@@ -158,7 +179,31 @@ const initializeDB = async () => {
     }
   }
   }
-  
+////////////*********UPDATE*************////////////
+const updateCollection = async (id,props) =>{
+  const {name,flag}=props;
+  let query="";
+  if(name && !flag){
+    query=`update collection set collection_name='${name}' where collection_id=${id}`;
+  }
+  else if(!name && flag && (flag==1 || flag==0)){
+    query=`update collection set collection_flag=${flag} where collection_id=${id}`;
+  }
+  else if(name && flag && (flag==1 || flag==0)){
+    query=`update collection set collection_flag=${flag}, collection_name='${name}' where collection_id=${id}`;
+  }
+   try{
+  const rows = await db.run(query);
+  if(rows.stmt.changes>0)
+    return true;
+  else
+    return false;
+  }catch(err){
+    throw new Error("no connection to database");
+  } 
+}
+
+////////////*********DELETE*************////////////
   const deleteCollectionByID = async(id) =>{
     id=parseInt(id);
     if(!isNaN(id)){
@@ -179,7 +224,6 @@ const initializeDB = async () => {
    
   }
 
-
   const deleteCollectionByName = async (name) =>{
     try{
       const rows = await db.run (`delete from collection where collection_name='${name}'`);
@@ -192,51 +236,26 @@ const initializeDB = async () => {
       throw new Error("not found");}
     }
 
-    const createCollection = async (props) =>{
-      const {name,flag}=props;
-      if(name && flag ){
-        if(flag==1 || flag==0){
-          try{
-            const rows = await db.run (`insert into collection (collection_name,collection_flag) values ('${name}',${flag})`);
-            return rows.stmt.lastID;
-          }catch(err){
-            throw new Error("no connection to database");
-          }
-        }
-        else
-        throw new Error("enter flag 0 or 1")//flag==1 || flag==0
-      }
-      else
-      throw new Error("enter flag and name");
-    
-    }
 
-    const updateCollection = async (id,props) =>{
-      const {name,flag}=props;
-      let query="";
-      if(name && !flag){
-        query=`update collection set collection_name='${name}' where collection_id=${id}`;
-      }
-      else if(!name && flag && (flag==1 || flag==0)){
-        query=`update collection set collection_flag=${flag} where collection_id=${id}`;
-      }
-      else if(name && flag && (flag==1 || flag==0)){
-        query=`update collection set collection_flag=${flag}, collection_name='${name}' where collection_id=${id}`;
-      }
-       try{
-      const rows = await db.run(query);
-      if(rows.stmt.changes>0)
-        return true;
-      else
-        return false;
+////////////*********ADMIN*************////////////
+
+////////////*********CREATE*************////////////
+  const createAdmin= async (props) => {
+    const {user,pass}=props;
+    if(user && pass){
+      try{
+        const rows = await db.run(`insert into admin (admin_user,admin_pass) values ('${user}','${pass}')`);
+        if(rows.stmt.changes>0)
+          return rows.stmt.lastID;
+        else
+          return false;
       }catch(err){
-        throw new Error("no connection to database");
+        throw new Error("Error conection with database")
       } 
     }
-
-  
-  //////////********* Admin **********//////////
-
+    return "Enter user and pass";
+  }
+////////////*********READ*************////////////
   const getAdmin = async (req) => {
     let query ="select * from admin ";
     if(req=='name' || req=="NAME" || req=="Name") {
@@ -280,6 +299,28 @@ const initializeDB = async () => {
       throw new Error("Error conection with database")
     }
   }
+////////////*********UPDATE*************////////////
+  const updateAdmin= async (id,props) => {
+    const {user,pass}=props;
+    let query=" ";
+    if(user && pass){
+      query=`update admin set admin_user='${user}', admin_pass='${pass}' where admin_id=${id}`;
+    }
+    else if(user && !pass)
+      query=`update admin set admin_user='${user}' where admin_id=${id}`;
+    else
+      query=`update admin set admin_pass='${pass}' where admin_id=${id}`;
+    try{
+    const rows = await db.run(query);
+    if(rows.stmt.changes>0)
+      return true;
+    else
+      return false;
+    }catch(err){
+      throw new Error("Error conection with database")
+    } 
+  }
+////////////*********DELETE*************////////////
   const deleteAdminId= async (id) => {
     id=parseInt(id);
     if(!isNaN(id)){
@@ -309,43 +350,37 @@ const initializeDB = async () => {
       throw new Error("Error conection with database")
     }
   }
-  const createAdmin= async (props) => {
-    const {user,pass}=props;
-    if(user && pass){
-       try{
-        const rows = await db.run(`insert into admin (admin_user,admin_pass) values ('${user}','${pass}')`);
-        if(rows.stmt.changes>0)
-          return rows.stmt.lastID;
-        else
-          return false;
-      }catch(err){
-        throw new Error("Error conection with database")
-      } 
-    }
-    return "Enter user and pass";
-  }
-  const updateAdmin= async (id,props) => {
-    const {user,pass}=props;
-    let query=" ";
-    if(user && pass){
-      query=`update admin set admin_user='${user}', admin_pass='${pass}' where admin_id=${id}`;
-    }
-    else if(user && !pass)
-      query=`update admin set admin_user='${user}' where admin_id=${id}`;
-    else
-      query=`update admin set admin_pass='${pass}' where admin_id=${id}`;
-     try{
-    const rows = await db.run(query);
-    if(rows.stmt.changes>0)
-      return true;
-    else
-      return false;
-    }catch(err){
-      throw new Error("Error conection with database")
-    } 
-  }
- //////////********* Order **********//////////
+  
+  
+////////////*********ORDER*************////////////
 
+////////////*********CREATE*************////////////
+  const createOrder= async (props) => {
+    let {date,quantity,amount,productID,clientName,area}=props;
+    quantity=parseInt(quantity);
+    amount=parseInt(amount);
+    productID=parseInt(productID);
+    if(date && quantity && amount && productID && clientName && area){
+      if(!isNaN(amount) && !isNaN(quantity) && !isNaN(productID)){
+        try{
+          const rows = await db.run(`INSERT INTO orders
+          ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
+          VALUES ('${date}',${quantity}, ${amount}, ${productID}, '${clientName}', '${area}')`);
+          if(rows.stmt.changes>0)
+            return rows.stmt.lastID;
+          else
+            return false;
+        }catch(err){
+          throw new Error("Error conection with database")
+        } 
+      }
+      else
+      throw new Error("quantity, amount and product_Id must be number")
+      
+    }
+    return "Enter all necessary data!!";
+  }
+////////////*********READ*************////////////
   const getOrder = async (order) => {
     let query="select * from orders ";
     switch(order){
@@ -441,63 +476,7 @@ const initializeDB = async () => {
     }
   }
 
-  const deleteOrderId= async (id) => {
-    id=parseInt(id);
-    if(!isNaN(id)){
-      try{
-        const rows = await db.run(`delete from orders where orders_id=${id}`);
-        if(rows.stmt.changes>0)
-          return true;
-        else
-          return false;
-        }catch(err){
-          throw new Error("Error conection with database")
-        }
-    }
-    else
-    throw new Error("enter id as number");
-   
-  }
-
-  const deleteOrderClientName= async (name) => {
-    try{
-    const rows = await db.run(`delete from orders where client_name='${name}'`);
-    if(rows.stmt.changes>0)
-      return true;
-    else
-      return false;
-    }catch(err){
-      throw new Error("Error conection with database")
-    }
-  }
-
-
-  const createOrder= async (props) => {
-    let {date,quantity,amount,productID,clientName,area}=props;
-    quantity=parseInt(quantity);
-    amount=parseInt(amount);
-    productID=parseInt(productID);
-    if(date && quantity && amount && productID && clientName && area){
-      if(!isNaN(amount) && !isNaN(quantity) && !isNaN(productID)){
-        try{
-          const rows = await db.run(`INSERT INTO orders
-          ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
-          VALUES ('${date}',${quantity}, ${amount}, ${productID}, '${clientName}', '${area}')`);
-          if(rows.stmt.changes>0)
-            return rows.stmt.lastID;
-          else
-            return false;
-        }catch(err){
-          throw new Error("Error conection with database")
-        } 
-      }
-      else
-      throw new Error("quantity, amount and product_Id must be number")
-       
-    }
-    return "Enter all necessary data!!";
-  }
-
+////////////*********UPDATE*************////////////
   const updateOrder= async (id,props) => {console.log("zzsss");
     let {quantity,productID,clientName,area}=props;
     let query=" ";
@@ -599,26 +578,73 @@ const initializeDB = async () => {
           else
           throw new Error("enter id as number");
     }
-  
-  ////////////*********Category*************////////////
-  const getcategory = async (orderby) => {
-    let query="select * from category";
-     switch(orderby){
-      case "name":
-        query+=" order by category_name";
-        break;
-      default:break;
+////////////*********DELETE*************////////////
+  const deleteOrderId= async (id) => {
+    id=parseInt(id);
+    if(!isNaN(id)){
+      try{
+        const rows = await db.run(`delete from orders where orders_id=${id}`);
+        if(rows.stmt.changes>0)
+          return true;
+        else
+          return false;
+        }catch(err){
+          throw new Error("Error conection with database")
+        }
     }
-    try {
-      const rows = await db.all(query);
-      if (rows.length == 0) {
-        throw new Error("Category is empty!");
+    else
+    throw new Error("enter id as number");
+  
+  }
+
+  const deleteOrderClientName= async (name) => {
+    try{
+    const rows = await db.run(`delete from orders where client_name='${name}'`);
+    if(rows.stmt.changes>0)
+      return true;
+    else
+      return false;
+    }catch(err){
+      throw new Error("Error conection with database")
+    }
+  }
+
+////////////*********CATEGORY*************////////////
+
+////////////*********CREATE*************////////////
+  const createCategory = async (props) =>{
+    const {name}=props;
+    if(name){
+        try{
+          const rows = await db.run (`insert into category (category_name) values ('${name}')`);
+          return rows.stmt.lastID;
+        }catch(err){
+          throw new Error("no connection to database");
+        }
+    }
+    else
+    throw new Error("enter name");
+
+  }
+////////////*********READ*************////////////
+  const getcategory = async (orderby) => {
+      let query="select * from category";
+      switch(orderby){
+        case "name":
+          query+=" order by category_name";
+          break;
+        default:break;
       }
-      return rows;
-    } catch (err) {
-      throw new Error("Could not retrieve list of category");
-    } 
-  };
+      try {
+        const rows = await db.all(query);
+        if (rows.length == 0) {
+          throw new Error("Category is empty!");
+        }
+        return rows;
+      } catch (err) {
+        throw new Error("Could not retrieve list of category");
+      } 
+    };
 
   const getcategoryById = async (id) => {
     id=parseInt(id);
@@ -638,7 +664,7 @@ const initializeDB = async () => {
     else{
       throw new Error(`Enter id as a number`)
     }
-   
+  
   };
 
   const getcategoryByName = async(name) =>{
@@ -654,7 +680,28 @@ const initializeDB = async () => {
       throw new Error(`Can't retrieve data`)
     }
   }
+  ////////////*********UPDATE*************////////////
+  const updateCategory = async (id,props) =>{
+    const {name}=props;
+    let query="";
+    id=parseInt(id);
+    if(name && !isNaN(id)){
+      query=`update category set category_name='${name}' where category_id=${id}`;
+    }
+    else
+      throw new Error("enter name in order to update")
+     try{
+    const rows = await db.run(query);
+    if(rows.stmt.changes>0)
+      return true;
+    else
+      return false;
+    }catch(err){
+      throw new Error("no connection to database");
+    } 
+  }
 
+////////////*********DELETE*************////////////
   const deleteCategoryByID = async(id) =>{
     id=parseInt(id);
     if(!isNaN(id)){
@@ -687,44 +734,32 @@ const initializeDB = async () => {
       throw new Error("not found");}
     }
 
-    const createCategory = async (props) =>{
-      const {name}=props;
-      if(name){
-          try{
-            const rows = await db.run (`insert into category (category_name) values ('${name}')`);
+////////////*********IMAGE*************////////////
+
+////////////*********CREATE*************////////////
+  const createImage = async (props) =>{
+    let {name,productID}=props;
+    productID=parseInt(productID);
+    if(name && productID && !isNaN(productID)){
+        try{
+          const id = await db.all (`select * from product where product_id=${productID}`);
+          if(id.length>0){
+            try{
+            const rows = await db.run (`insert into image (image_name,product_product_id) values ('${name}',${productID})`);
             return rows.stmt.lastID;
-          }catch(err){
-            throw new Error("no connection to database");
+          }catch{
+            throw new Error("can't insert into Image table");
           }
-      }
-      else
-      throw new Error("enter name");
-    
-    }
-
-    const updateCategory = async (id,props) =>{
-      const {name}=props;
-      let query="";
-      id=parseInt(id);
-      if(name && !isNaN(id)){
-        query=`update category set category_name='${name}' where category_id=${id}`;
-      }
-      else
-        throw new Error("enter name in order to update")
-       try{
-      const rows = await db.run(query);
-      if(rows.stmt.changes>0)
-        return true;
-      else
-        return false;
-      }catch(err){
-        throw new Error("no connection to database");
-      } 
-    }
-
-      ////////////*********Image*************////////////
-
-        
+        }
+          else{
+            throw new Error("Product_id is not found");
+          }
+  }catch{
+    throw new Error("can't connect to database");
+  }
+  }
+  };
+////////////*********READ*************////////////
   const getimage = async (orderby) => {
     let query="select * from image";
      switch(orderby){
@@ -744,140 +779,142 @@ const initializeDB = async () => {
     } 
   };
       
-       const getimageById = async (id) => {
-        id=parseInt(id);
-        if(!isNaN(id)){
-          try{
-            const rows = await db.all(`select * from image where image_id =${id} `);
-            if(rows.length>0){
-            return rows;
-            }
-            else if(rows.length==0){
-              throw new Error(`Image with id=${id} is not found`)
-            }
-            }catch(err){
-              throw new Error(`Can't retreive data`)
-            }
-          }
-        else{
-          throw new Error(`Enter id as a number`)
-        }
-       
-      };
+  const getimageById = async (id) => {
+  id=parseInt(id);
+  if(!isNaN(id)){
+    try{
+      const rows = await db.all(`select * from image where image_id =${id} `);
+      if(rows.length>0){
+      return rows;
+      }
+      else if(rows.length==0){
+        throw new Error(`Image with id=${id} is not found`)
+      }
+      }catch(err){
+        throw new Error(`Can't retreive data`)
+      }
+    }
+  else{
+    throw new Error(`Enter id as a number`)
+  }
+  
+};
     
-     const getimageByProductId = async(id) =>{
-        try{
-        const rows =  await db.all(`select * from image where product_product_id = ${id}`);
-        if(rows.length>0){
-          return rows;
-        }
-        else{
-          throw new Error(`Image with Product_id=${id} is not found`)
-        }
-        }catch(err){
-          throw new Error(`Can't retrieve data`)
-        }
-      };
-    
-      const deleteImageByID = async(id) =>{
-        id=parseInt(id);
-        if(!isNaN(id)){
-          try{ 
-            const rows = await db.run(`delete from image where image_id=${id}`);
-            if(rows.stmt.changes>0){
-              return true;
-             }
-             else 
-             return false;
-           }catch(err){
-             throw new Error("not found")
-          }
-        }
-        else{
-          throw new Error("Enter id as a number");
-        }
-       
-      };
-    
-     const deleteImageByName = async (name) =>{
-        try{
-          const rows = await db.run (`delete from image where image_name='${name}'`);
-          if(rows.stmt.changes>0){
-            return true;
+  const getimageByProductId = async(id) =>{
+    try{
+    const rows =  await db.all(`select * from image where product_product_id = ${id}`);
+    if(rows.length>0){
+      return rows;
+    }
+    else{
+      throw new Error(`Image with Product_id=${id} is not found`)
+    }
+    }catch(err){
+      throw new Error(`Can't retrieve data`)
+    }
+  };
+////////////*********UPDATE*************////////////
+const updateImage = async (id,props) =>{
+  let {name,productID}=props;
+  let query="";
+  productID=parseInt(productID);
+  id=parseInt(id);
+  if(!isNaN(id)){
+    if(name && productID && !isNaN(productID)){
+      query=`update image set image_name='${name}' , product_product_id=${productID} where image_id=${id}`;
+    }
+    else if(!name && productID && !isNaN(productID)){
+      query=`update image set product_product_id=${productID} where image_id=${id}`;
+    }
+    else{
+      query=`update image set image_name='${name}' where image_id=${id}`;
+    }
+  }
+    else
+      throw new Error("enter id as number")
+      try{
+    const rows = await db.run(query);
+    if(rows.stmt.changes>0)
+      return true;
+    else
+      return false;
+    }catch(err){
+      throw new Error("no connection to database");
+    }
+    };
+////////////*********DELETE*************////////////
+  const deleteImageByID = async(id) =>{
+    id=parseInt(id);
+    if(!isNaN(id)){
+      try{ 
+        const rows = await db.run(`delete from image where image_id=${id}`);
+        if(rows.stmt.changes>0){
+          return true;
           }
           else 
-          return false;}
-          catch{
-          throw new Error("not found");}
-        }
-
-        const deleteImageByProduct = async (id) =>{
-          try{
-            const rows = await db.run (`delete from image where product_product_id=${id}`);
-            if(rows.stmt.changes>0){
-              return true;
-            }
-            else 
-            return false;}
-            catch{
-            throw new Error("not found");}
-          };
-    
-        const createImage = async (props) =>{
-          let {name,productID}=props;
-          productID=parseInt(productID);
-          if(name && productID && !isNaN(productID)){
-              try{
-                const id = await db.all (`select * from product where product_id=${productID}`);
-                if(id.length>0){
-                  try{
-                  const rows = await db.run (`insert into image (image_name,product_product_id) values ('${name}',${productID})`);
-                  return rows.stmt.lastID;
-                }catch{
-                  throw new Error("can't insert into Image table");
-                }
-              }
-                else{
-                  throw new Error("Product_id is not found");
-                }
-        }catch{
-          throw new Error("can't connect to database");
-        }
+          return false;
+        }catch(err){
+          throw new Error("not found")
       }
-    };
+    }
+    else{
+      throw new Error("Enter id as a number");
+    }
     
-        const updateImage = async (id,props) =>{
-          let {name,productID}=props;
-          let query="";
-          productID=parseInt(productID);
-          id=parseInt(id);
-          if(!isNaN(id)){
-            if(name && productID && !isNaN(productID)){
-              query=`update image set image_name='${name}' , product_product_id=${productID} where image_id=${id}`;
-            }
-            else if(!name && productID && !isNaN(productID)){
-              query=`update image set product_product_id=${productID} where image_id=${id}`;
-            }
-            else{
-              query=`update image set image_name='${name}' where image_id=${id}`;
-            }
-          }
-          else
-            throw new Error("enter id as number")
-           try{
-          const rows = await db.run(query);
-          if(rows.stmt.changes>0)
-            return true;
-          else
-            return false;
-          }catch(err){
-            throw new Error("no connection to database");
-          }
-        };
-
-  ////////////*********Product*************////////////
-
+  };
   
+  const deleteImageByName = async (name) =>{
+    try{
+      const rows = await db.run (`delete from image where image_name='${name}'`);
+      if(rows.stmt.changes>0){
+        return true;
+      }
+      else 
+      return false;}
+      catch{
+      throw new Error("not found");}
+    }
+
+  const deleteImageByProduct = async (id) =>{
+    try{
+      const rows = await db.run (`delete from image where product_product_id=${id}`);
+      if(rows.stmt.changes>0){
+        return true;
+      }
+      else 
+      return false;}
+      catch{
+      throw new Error("not found");}
+    };
+////////////*********PRODUCT*************////////////
+////////////*********CREATE*************////////////
+  const createProduct = async (props) =>{
+    let {name,description,price,quantity,date,categoryID,collectionID}=props;
+    price=parseInt(price);
+    quantity=parseInt(quantity);
+    categoryID=parseInt(categoryID);
+    collectionID=parseInt(collectionID);////
+    if(name && description && price && quantity && date && categoryID && collectionID && !isNaN(price) && !isNaN(quantity) && !isNaN(collectionID) && !isNaN(categoryID)){
+        try{
+          const collValue = await db.all (`select * from collection where collection_id=${collectionID}`);
+          const catValue = await db.all (`select * from category where category_id=${categoryID}`);
+          if(collValue.length>0 && catValue.length>0){
+            try{
+            const rows = await db.run (`insert into product (product_name,product_description,product_price,product_quantity,product_date,category_category_id,collection_collection_id) values ('${name}','${description}',${price},${quantity},'${date}',${categoryID},${collectionID})`);
+            return rows.stmt.lastID;
+          }catch{
+            throw new Error("can't insert into Image table");
+          }
+        }
+          else{
+            throw new Error("Product_id is not found");
+          }
+    }catch{
+    throw new Error("can't connect to database");
+    }
+    }
+    }
+////////////*********READ*************////////////
   const getproduct = async (orderby) => {
     let query="select * from product";
      switch(orderby){
@@ -902,40 +939,39 @@ const initializeDB = async () => {
       throw new Error("Could not retrieve list of product");
     } 
   };
-    const getproductById = async (id) => {
-    id=parseInt(id);
-    if(!isNaN(id)){
-      try{
-        const rows = await db.all(`select * from product where product_id =${id} `);
-        if(rows.length>0){
-        return rows;
-        }
-        else if(rows.length==0){
-          throw new Error(`Product with id=${id} is not found`)
-        }
-        }catch(err){
-          throw new Error(`Can't retreive data`)
-        }
-      }
-    else{
-      throw new Error(`Enter id as a number`)
-    }
-   
-  };
-
-const getproductByName = async(id) =>{
+  const getproductById = async (id) => {
+  id=parseInt(id);
+  if(!isNaN(id)){
     try{
-    const rows =  await db.all(`select * from product where product_name = '${id}'`);
-    if(rows.length>0){
+      const rows = await db.all(`select * from product where product_id =${id} `);
+      if(rows.length>0){
       return rows;
+      }
+      else if(rows.length==0){
+        throw new Error(`Product with id=${id} is not found`)
+      }
+      }catch(err){
+        throw new Error(`Can't retreive data`)
+      }
     }
-    else{
-      throw new Error(`Product with Product_id=${id} is not found`)
-    }
-    }catch(err){
-      throw new Error(`Can't retrieve data`)
-    }
+  else{
+    throw new Error(`Enter id as a number`)
   }
+  
+};
+  const getproductByName = async(id) =>{
+      try{
+      const rows =  await db.all(`select * from product where product_name = '${id}'`);
+      if(rows.length>0){
+        return rows;
+      }
+      else{
+        throw new Error(`Product with Product_id=${id} is not found`)
+      }
+      }catch(err){
+        throw new Error(`Can't retrieve data`)
+      }
+    }
   const getproductByCategory = async (id) => {
     id=parseInt(id);
     if(!isNaN(id)){
@@ -954,7 +990,7 @@ const getproductByName = async(id) =>{
     else{
       throw new Error(`Enter id as a number`)
     }
-   
+    
   };
   const getproductByCollection = async (id) => {
     id=parseInt(id);
@@ -976,88 +1012,8 @@ const getproductByName = async(id) =>{
     }
    
   };
+////////////*********UPDATE*************////////////
 
-  const deleteProductByID = async(id) =>{
-    id=parseInt(id);
-    if(!isNaN(id)){
-      try{ 
-        const rows = await db.run(`delete from product where product_id=${id}`);
-        if(rows.stmt.changes>0){
-          return true;
-         }
-         else 
-         return false;
-       }catch(err){
-         throw new Error("not found")
-      }
-    }
-    else{
-      throw new Error("Enter id as a number");
-    }
-   
-  }
-
- const deleteProductByName = async (name) =>{
-    try{
-      const rows = await db.run (`delete from product where product_name='${name}'`);
-      if(rows.stmt.changes>0){
-        return true;
-      }
-      else 
-      return false;}
-      catch{
-      throw new Error("not found");}
-    }
-    const deleteProductByCollection = async (name) =>{
-      try{
-        const rows = await db.run (`delete from product where category_category_id=${name}`);
-        if(rows.stmt.changes>0){
-          return true;
-        }
-        else 
-        return false;}
-        catch{
-        throw new Error("not found");}
-      }
-      const deleteProductByCategory = async (name) =>{
-        try{
-          const rows = await db.run (`delete from product where category_category_id=${name}`);
-          if(rows.stmt.changes>0){
-            return true;
-          }
-          else 
-          return false;}
-          catch{
-          throw new Error("not found");}
-        }
-
-
-    const createProduct = async (props) =>{
-      let {name,description,price,quantity,date,categoryID,collectionID}=props;
-      price=parseInt(price);
-      quantity=parseInt(quantity);
-      categoryID=parseInt(categoryID);
-      collectionID=parseInt(collectionID);////
-      if(name && description && price && quantity && date && categoryID && collectionID && !isNaN(price) && !isNaN(quantity) && !isNaN(collectionID) && !isNaN(categoryID)){
-          try{
-            const collValue = await db.all (`select * from collection where collection_id=${collectionID}`);
-            const catValue = await db.all (`select * from category where category_id=${categoryID}`);
-            if(collValue.length>0 && catValue.length>0){
-              try{
-              const rows = await db.run (`insert into product (product_name,product_description,product_price,product_quantity,product_date,category_category_id,collection_collection_id) values ('${name}','${description}',${price},${quantity},'${date}',${categoryID},${collectionID})`);
-              return rows.stmt.lastID;
-            }catch{
-              throw new Error("can't insert into Image table");
-            }
-          }
-            else{
-              throw new Error("Product_id is not found");
-            }
-    }catch{
-      throw new Error("can't connect to database");
-    }
-  }
-}
 /*
     const updateImage = async (id,props) =>{
       let {name,productID}=props;
@@ -1088,63 +1044,149 @@ const getproductByName = async(id) =>{
       } 
     }  */
 
+////////////*********DELETE*************////////////
+  const deleteProductByID = async(id) =>{
+    id=parseInt(id);
+    if(!isNaN(id)){
+      try{ 
+        const rows = await db.run(`delete from product where product_id=${id}`);
+        if(rows.stmt.changes>0){
+          return true;
+         }
+         else 
+         return false;
+       }catch(err){
+         throw new Error("not found")
+      }
+    }
+    else{
+      throw new Error("Enter id as a number");
+    }
+   
+  }
 
-
-
-
+  const deleteProductByName = async (name) =>{
+    try{
+      const rows = await db.run (`delete from product where product_name='${name}'`);
+      if(rows.stmt.changes>0){
+        return true;
+      }
+      else 
+      return false;}
+      catch{
+      throw new Error("not found");}
+    }
+  const deleteProductByCollection = async (name) =>{
+    try{
+      const rows = await db.run (`delete from product where category_category_id=${name}`);
+      if(rows.stmt.changes>0){
+        return true;
+      }
+      else 
+      return false;}
+      catch{
+      throw new Error("not found");}
+    }
+  const deleteProductByCategory = async (name) =>{
+    try{
+      const rows = await db.run (`delete from product where category_category_id=${name}`);
+      if(rows.stmt.changes>0){
+        return true;
+      }
+      else 
+      return false;}
+      catch{
+      throw new Error("not found");}
+    }
 
   const controller = {
+    /*COLLECTION*/
+    /*CREATE*/
+    createCollection,
+    /*READ*/
     getcollection,
     getcollectionById,
     getcollectionByName,
+    getcollectionByFlag,
+    /*UPDATE*/
+    updateCollection,
+    /*DELETE*/
     deleteCollectionByID,
     deleteCollectionByName,
-    getcollectionByFlag,
-    createCollection,
-    updateCollection,
+
+    /*ADMIN*/
+    /*CREATE*/
+    createAdmin,
+    /*READ*/
     getAdmin,
     getAdminId,
     getAdminName,
+    /*UPDATE*/
+    updateAdmin,
+    updateAdmin,
+    /*DELETE*/
     deleteAdminId,
     deleteAdminName,
-    createAdmin,
-    updateAdmin,
-    updateAdmin,
+    
+    /*ORDER*/
+    /*CREATE*/
+    createOrder,
+    /*READ*/
     getOrder,
     getOrderId,
     getOrderClientName,
     getOrderProductId,
     getOrderArea,
     getOrderDate,
+    /*UPDATE*/
+    updateOrder,
+    /*DELETE*/
     deleteOrderId,
     deleteOrderClientName,
-    createOrder,
-    updateOrder,
+    
+    /*CATEGORY*/
+    /*CREATE*/
+    createCategory,
+    /*READ*/
     getcategory,
     getcategoryById,
     getcategoryByName,
+    /*UPDATE*/
+    updateCategory,
+    /*DELETE*/
     deleteCategoryByID,
     deleteCategoryByName,
-    createCategory,
-    updateCategory,
+
+    /*IMAGE*/
+    /*CREATE*/
+    createImage,
+    /*READ*/ /*IN THIS CONTROLLER THE I IN IMAGE IS SMALL LETTER*/
     getimage,
     getimageById,
     getimageByProductId,
+    /*UPDATE*/
+    updateImage,
+    /*DELETE*/
     deleteImageByID,
     deleteImageByName,
     deleteImageByProduct,
-    createImage,
-    updateImage,
+
+    /*PRODUCT*/
+    /*CREATE*/
+    createProduct,
+    /*READ*/ /*IN THIS CONTROLLER THE P IN PRODUCT IS SMALL LETTER*/
     getproduct,
     getproductById,
     getproductByName,
     getproductByCategory,
     getproductByCollection,
+    /*UPDATE*/
+    /*THERE IS A MISSING CONTROLLER*/
+    /*DELETE*/
     deleteProductByID,
     deleteProductByName,
     deleteProductByCategory,
     deleteProductByCollection,
-    createProduct
 
   }
   return controller;
