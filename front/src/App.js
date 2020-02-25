@@ -7,14 +7,14 @@ import Contact from "./pages/contact_us /contact_us";
 import Gallery from "./pages/gallery/gallery";
 
 class App extends Component {
-    constructor(props) {
-      super(props);
-      this.state = { 
-        collection:[],
-        product:[],
-        image:[]
-      };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      collection: [],
+      product: [],
+      image: []
+    };
+  }
 
   getCollectionList = async () => {
     try {
@@ -83,10 +83,32 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact path="/"  component={() => <Home collection={this.state.collection.filter(obj => obj.collection_flag)}  product={this.state.product} image={this.state.image}/>}/>
-              <Route path="/about"  component={About} />
+              <Route
+                exact
+                path="/"
+                component={() => (
+                  <Home
+                    collection={this.state.collection.filter(
+                      obj => obj.collection_flag
+                    )}
+                    product={this.state.product}
+                    image={this.state.image}
+                  />
+                )}
+              />
+              <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route  path="/gallery"component={() => <Gallery product={this.state.product} image={this.state.image} collection={this.state.collection} category={this.state.category}/>}/>
+              <Route
+                path="/gallery"
+                component={() => (
+                  <Gallery
+                    product={this.state.product}
+                    image={this.state.image}
+                    collection={this.state.collection}
+                    category={this.state.category}
+                  />
+                )}
+              />
             </Switch>
           </div>
         </BrowserRouter>
