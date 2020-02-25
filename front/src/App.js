@@ -5,16 +5,17 @@ import Home from "./pages/home/home";
 import About from "./pages/about/about";
 import Contact from "./pages/contact_us /contact_us";
 import Gallery from "./pages/gallery/gallery";
+import EditProduct from "./pages/admin//editProduct";
 
 class App extends Component {
-    constructor(props) {
-      super(props);
-      this.state = { 
-        collection:[],
-        product:[],
-        image:[]
-      };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      collection: [],
+      product: [],
+      image: []
+    };
+  }
 
   getCollectionList = async () => {
     try {
@@ -69,10 +70,39 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact path="/"  component={() => <Home collection={this.state.collection.filter(obj => obj.collection_flag)}  product={this.state.product} image={this.state.image}/>}/>
-              <Route path="/about"  component={About} />
+              <Route
+                exact
+                path="/"
+                component={() => (
+                  <Home
+                    collection={this.state.collection.filter(
+                      obj => obj.collection_flag
+                    )}
+                    product={this.state.product}
+                    image={this.state.image}
+                  />
+                )}
+              />
+              <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route  path="/gallery"component={() => <Gallery product={this.state.product} image={this.state.image}/>}/>
+              <Route
+                path="/gallery"
+                component={() => (
+                  <Gallery
+                    product={this.state.product}
+                    image={this.state.image}
+                  />
+                )}
+              />
+              <Route
+                path="/admin/"
+                component={() => (
+                  <EditProduct
+                    product={this.state.product}
+                    image={this.state.image}
+                  />
+                )}
+              />
             </Switch>
           </div>
         </BrowserRouter>
