@@ -7,29 +7,42 @@ import { Button, InputGroup } from "react-bootstrap";
 export class modalWindow extends React.Component {
   state = {
     showPrice: true,
-    imgSrc: image1
+    imgSrc: image1,
+    category:[],
+    collection:[]
   };
 
   handleMouseOver = event => {
-    console.log("hello");
     this.setState({
       imgSrc: event.target.src
     });
-    console.log(this.state.imgSrc);
   };
+  async componentDidMount(){
+     this.setState({
+       category:this.props.category.filter(obj=> obj.category_id == this.props.product[0].category_category_id),
+       collection:this.props.collection.filter(obj=> obj.collection_id == this.props.product[0].collection_collection_id)
+    })
+  }
   render() {
     return (
       <div className="modalWindow">
         <div className="modalWindow_container1">
           <div className="mainImgContainer">
             <img src={this.state.imgSrc} className="modalWindow_mainImg" />
-            <div className="modalWindow_miniImgContainer">
-              <img
+            <div className="modalWindow_miniImgContainer">{console.log("modalss",this.props.image)}
+             {this.props.image.map((image,index) => (
+                 <img
+                className="modalWindow_miniImg"
+                src={require('../../assets/images/'+image.image_name) }
+                onMouseOver={this.handleMouseOver}
+              /> 
+              ))} 
+              {/* <img
                 className="modalWindow_miniImg"
                 src={image1}
                 onMouseOver={this.handleMouseOver}
-              />
-              <img
+              /> */}
+             {/*  <img
                 className="modalWindow_miniImg"
                 src={image2}
                 onMouseOver={this.handleMouseOver}
@@ -38,32 +51,32 @@ export class modalWindow extends React.Component {
                 className="modalWindow_miniImg"
                 src={image3}
                 onMouseOver={this.handleMouseOver}
-              />
+              /> */}
             </div>
           </div>
         </div>
 
-        <div className="modalWindow_container2">
+        <div className="modalWindow_container2">{console.log(this.props.product[0])}
           <table>
             <tr>
               <th>Name: </th>
-              <td>item1</td>
+              <td>{this.props.product[0].product_name}</td>
             </tr>
             <tr>
               <th>Description: </th>
-              <td>good....</td>
+              <td>{this.props.product[0].product_description}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <th>Quantity: </th>
               <td>12</td>
-            </tr>
+            </tr> **************Quantity*************/}
             <tr>
               <th>Category: </th>
-              <td>aaa</td>
+            <td>{(this.state.category.length!=0)?this.state.category[0].category_name:""}</td>
             </tr>
             <tr>
               <th>Collection: </th>
-              <td>bbb</td>
+              <td>{(this.state.collection.length!=0)?this.state.collection[0].collection_name:""}</td>
             </tr>
             <tr>
               <td></td>
