@@ -29,13 +29,20 @@ export class modalWindow extends React.Component {
         <div className="modalWindow_container1">
           <div className="mainImgContainer">
             <img src={this.state.imgSrc} className="modalWindow_mainImg" />
-            <div className="modalWindow_miniImgContainer">
-              <img
+            <div className="modalWindow_miniImgContainer">{console.log("modalss",this.props.image)}
+             {this.props.image.map((image,index) => (
+                 <img
+                className="modalWindow_miniImg"
+                src={require('../../assets/images/'+image.image_name) }
+                onMouseOver={this.handleMouseOver}
+              /> 
+              ))} 
+              {/* <img
                 className="modalWindow_miniImg"
                 src={image1}
                 onMouseOver={this.handleMouseOver}
-              />
-              <img
+              /> */}
+             {/*  <img
                 className="modalWindow_miniImg"
                 src={image2}
                 onMouseOver={this.handleMouseOver}
@@ -44,7 +51,7 @@ export class modalWindow extends React.Component {
                 className="modalWindow_miniImg"
                 src={image3}
                 onMouseOver={this.handleMouseOver}
-              />
+              /> */}
             </div>
           </div>
         </div>

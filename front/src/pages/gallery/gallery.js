@@ -31,7 +31,7 @@ class Gallery extends React.Component {
     <div className="gallery">
       <Header class="hello" />
       <div className="gallery_filter">
-        <Filter />
+        <Filter collection={this.props.collection} category={this.props.category}/>
       </div>
       <div className="gallery_CardsContainer">
        {this.props.image.map((image,index) => (
