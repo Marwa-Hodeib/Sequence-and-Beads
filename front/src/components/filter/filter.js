@@ -14,7 +14,7 @@ import {
     super(props);
     this.state = { 
       collection:[],
-      category:[]
+      category:[],
     };
   }
  
@@ -40,9 +40,9 @@ import {
             variant="outline-secondary"
             title="Collection"
             id="input-group-dropdown-2">
-                 {this.state.collection.map((image,index) => (
+              {this.state.collection.map((image,index) => (
               <Dropdown.Item href="#">{image.collection_name}</Dropdown.Item>
-              ))}
+              ))} 
           </DropdownButton>  
             <DropdownButton
             as={InputGroup.Append}

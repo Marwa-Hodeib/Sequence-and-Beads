@@ -1,7 +1,7 @@
 import sqlite from "sqlite";
 
 const initializeDB = async () => {
-  const db = await sqlite.open("./db.sqlite");
+  const db = await sqlite.open("./src/db.sqlite");
 /*      await db.run(`CREATE TABLE admin (
         admin_id integer NOT NULL CONSTRAINT admin_pk PRIMARY KEY,
         admin_user text NOT NULL UNIQUE,
@@ -33,7 +33,7 @@ const initializeDB = async () => {
       );`) */     
 /*      await db.run(`CREATE TABLE image (
         image_id integer NOT NULL CONSTRAINT image_pk PRIMARY KEY,
-        product_product_id integer NOT NULL,
+        productimage1.jpg_product_id integer NOT NULL,
         image_name text NOT NULL,
         CONSTRAINT image_product FOREIGN KEY (product_product_id)
         REFERENCES product (product_id)
@@ -80,7 +80,7 @@ const initializeDB = async () => {
         ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
         VALUES ('2-1-2020', 2, 20000, 2, 'najwa', 'zahle'); `) */    
 
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'image1.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'image2.jpg')`)
 //   await db.run(`insert into image ("product_product_id" ,"image_name") values (2,'image2.jpg')`)
 //   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'image3.jpg')`)
 //   await db.run(`insert into image ("product_product_id" ,"image_name") values (3,'background_contact_2.jpg')`)

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "/home/oussama/Desktop/Sequins-and-Beads-new-/front/src/pages/gallery/gallery.css";
 import Filter from "../../components/filter/filter";
 import Header from "../../components/header/header";
 import Footer from "../../components/Footer/Footer";

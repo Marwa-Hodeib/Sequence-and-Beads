@@ -6,8 +6,6 @@ import Footer from "../../components/Footer/Footer";
 import Card from "../../components/card/card";
 import { Button, Modal } from "react-bootstrap";
 
-
-
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
@@ -35,12 +33,11 @@ class Gallery extends React.Component {
       </div>
       <div className="gallery_CardsContainer">
        {this.props.image.map((image,index) => (
-         (index>0 && index<7)?
-            <Card image={this.props.image.filter(obj=> obj.product_product_id == index)}
-            product={this.props.product.filter(obj1=>obj1.product_id==index)}
+            <Card image={this.props.image.filter(obj=> obj.product_product_id == image.product_product_id)}
+            product={this.props.product.filter(obj1=>obj1.product_id==image.product_product_id)}
             category={this.props.category}
-            collection={this.props.collection} />:""
-          ))}  
+         collection={this.props.collection} />
+          ))}   
       
       </div> 
       <div className="galleryButtonMore">

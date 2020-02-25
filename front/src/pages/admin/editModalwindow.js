@@ -1,8 +1,8 @@
 import React from "react";
-import "/home/oussama/Desktop/Sequins-and-Beads-new-/front/src/pages/admin/editModalwindow.js";
 import image1 from "./img/cat-cloning_resize_md.jpg";
 import image2 from "./img/220px-White_Persian_Cat.jpg";
 import image3 from "./img/img1.jpg";
+import "/home/zeinab/.local/share/Trash/files/Sequins-and-Beads-new-/front/src/components/modalWindow/modalWindow.css";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 export class modalWindow extends React.Component {
   state = {

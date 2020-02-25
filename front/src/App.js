@@ -99,13 +99,14 @@ class App extends Component {
               />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-<<<<<<< HEAD
               <Route
                 path="/gallery"
                 component={() => (
                   <Gallery
                     product={this.state.product}
                     image={this.state.image}
+                    collection={this.state.collection}
+                    category={this.state.category}
                   />
                 )}
               />
@@ -118,9 +119,7 @@ class App extends Component {
                   />
                 )}
               />
-=======
               <Route  path="/gallery"component={() => <Gallery product={this.state.product} image={this.state.image} collection={this.state.collection} category={this.state.category}/>}/>
->>>>>>> 3b8608c820b4035f2ec9e84305d6ab95435fcabd
             </Switch>
           </div>
         </BrowserRouter>

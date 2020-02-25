@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./card.css";
-import Image1 from "./img/Thinking-of-getting-a-cat.png";
 import { Modal, Button } from "react-bootstrap";
 import ModalWindow from "../modalWindow/modalwindow";
 
