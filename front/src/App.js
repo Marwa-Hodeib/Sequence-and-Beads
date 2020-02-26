@@ -5,6 +5,7 @@ import Home from "./pages/home/home";
 import About from "./pages/about/about";
 import Contact from "./pages/contact_us /contact_us";
 import Gallery from "./pages/gallery/gallery";
+import EditProduct from "./pages/admin//editProduct";
 
 class App extends Component {
   constructor(props) {
@@ -98,6 +99,26 @@ class App extends Component {
               />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
+              <Route
+                path="/gallery"
+                component={() => (
+                  <Gallery
+                    product={this.state.product}
+                    image={this.state.image}
+                    collection={this.state.collection}
+                    category={this.state.category}
+                  />
+                )}
+              />
+              <Route
+                path="/admin/"
+                component={() => (
+                  <EditProduct
+                    product={this.state.product}
+                    image={this.state.image}
+                  />
+                )}
+              />
               <Route
                 path="/gallery"
                 component={() => (
