@@ -9,8 +9,21 @@ import {
   InputGroup
 } from "react-bootstrap";
 
-export class searchBar extends React.Component {
-  state = {};
+class searchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collection: [],
+      category: []
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      collection: this.props.collection,
+      category: this.props.category ? this.props.category : []
+    });
+  }
 
   render() {
     return (
@@ -30,11 +43,9 @@ export class searchBar extends React.Component {
             title="Collection"
             id="input-group-dropdown-2"
           >
-            <Dropdown.Item href="#">Action</Dropdown.Item>
-            <Dropdown.Item href="#">Another action</Dropdown.Item>
-            <Dropdown.Item href="#">Something else here</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#">Separated link</Dropdown.Item>
+            {this.state.collection.map((image, index) => (
+              <Dropdown.Item href="#">{image.collection_name}</Dropdown.Item>
+            ))}
           </DropdownButton>
           <DropdownButton
             as={InputGroup.Append}
@@ -42,14 +53,12 @@ export class searchBar extends React.Component {
             title="Category"
             id="input-group-dropdown-2"
           >
-            <Dropdown.Item href="#">Action</Dropdown.Item>
-            <Dropdown.Item href="#">Another action</Dropdown.Item>
-            <Dropdown.Item href="#">Something else here</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#">Separated link</Dropdown.Item>
+            {this.state.category.map((image, index) => (
+              <Dropdown.Item href="#">{image.category_name}</Dropdown.Item>
+            ))}
           </DropdownButton>
           <InputGroup.Append>
-            <Button variant="outline-secondary">Button</Button>
+            {/*   <Button variant="outline-secondary">Button</Button> */}
           </InputGroup.Append>
         </InputGroup>
       </div>

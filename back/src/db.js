@@ -1,23 +1,23 @@
 import sqlite from "sqlite";
 
 const initializeDB = async () => {
-  const db = await sqlite.open("./db.sqlite");
-/*     await db.run(`CREATE TABLE admin (
+  const db = await sqlite.open("./src/db.sqlite");
+/*      await db.run(`CREATE TABLE admin (
         admin_id integer NOT NULL CONSTRAINT admin_pk PRIMARY KEY,
         admin_user text NOT NULL UNIQUE,
         admin_pass text NOT NULL
-      );`) */   
-/*     await db.run(`CREATE TABLE category (
+      );`) */    
+/*      await db.run(`CREATE TABLE category (
         category_id integer NOT NULL CONSTRAINT category_pk PRIMARY KEY,
         category_name text NOT NULL UNIQUE
-      );`) */   
-/*     await db.run(`CREATE TABLE collection (
+      );`) */    
+/*      await db.run(`CREATE TABLE collection (
         collection_id integer NOT NULL CONSTRAINT collection_pk PRIMARY KEY,
         collection_name text NOT NULL UNIQUE,
         collection_flag integer NOT NULL,
         collection_image text NOT NULL
-      );`) */   
-/*     await db.run(`CREATE TABLE product (
+      );`) */    
+/*      await db.run(`CREATE TABLE product (
         product_id integer NOT NULL CONSTRAINT product_pk PRIMARY KEY,
         product_name text NOT NULL UNIQUE,
         product_description text NOT NULL,
@@ -30,15 +30,15 @@ const initializeDB = async () => {
         REFERENCES category (category_id),
         CONSTRAINT product_collection FOREIGN KEY (collection_collection_id)
         REFERENCES collection (collection_id)
-      );`) */    
-/*     await db.run(`CREATE TABLE image (
+      );`) */     
+/*      await db.run(`CREATE TABLE image (
         image_id integer NOT NULL CONSTRAINT image_pk PRIMARY KEY,
-        product_product_id integer NOT NULL,
+        productimage1.jpg_product_id integer NOT NULL,
         image_name text NOT NULL,
         CONSTRAINT image_product FOREIGN KEY (product_product_id)
         REFERENCES product (product_id)
-      );`) */     
-/*     await db.run(`CREATE TABLE orders (
+      );`) */      
+/*      await db.run(`CREATE TABLE orders (
         orders_id integer NOT NULL CONSTRAINT order_pk PRIMARY KEY,
         orders_date text NOT NULL,
         orders_quantity integer NOT NULL,
@@ -48,45 +48,45 @@ const initializeDB = async () => {
         area text NOT NULL,
         CONSTRAINT order_product FOREIGN KEY (product_product_id)
         REFERENCES product (product_id)
-      );`) */    
+      );`) */     
   
-//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('summer',1,'1.png');`)
-//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('winter',0,'2.png');`)
-//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('autumn',0,'3.jpg');`)
-// await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('spring',0,'4.jpeg');`)
+//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('summer',1,'image1.jpg');`)
+//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('winter',0,'image2.jpg');`)
+//  await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('autumn',0,'image3.jpg');`)
+// await db.run(`insert into collection (collection_name,collection_flag,collection_image) values ('spring',0,'84d71e19-1e9a-4523-8579-09db4e849a2e.jpg');`)
 
 //  await db.run(`insert into admin (admin_user,admin_pass) values ('admin','admin');`)
 
 //  await db.run(`insert into category (category_name) VALUES('bracelet')`)
 //  await db.run(`insert into category (category_name) VALUES('ring')`)
 
-/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name",20000,5,1,2)`) */   
-/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name1",20000,5,2,1)`) */   
-/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name2",20000,5,1,1)`) */  
-/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name3",20000,5,1,2)`) */  
-/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name4",20000,5,2,1)`) */   
-/*   await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
-      values("2-2-2020","description of the item","name5",20000,5,1,2)`) */  
+/*    await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name",20000,5,1,2)`) */    
+/*    await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name1",20000,5,2,1)`) */    
+/*    await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name2",20000,5,1,1)`) */   
+/*    await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name3",20000,5,1,2)`) */   
+/*    await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name4",20000,5,2,1)`) */    
+/*    await db.run(`INSERT into product (product_date,product_description,product_name,product_price,product_quantity,category_category_id,collection_collection_id)
+      values("2-2-2020","description of the item","name5",20000,5,1,2)`) */   
   
-/*   await db.run(`INSERT INTO orders
+/*    await db.run(`INSERT INTO orders
       ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
-       VALUES ('2-2-2020', 2, 20000, 1, 'joe', 'beirut'); `) */  
-  /*   await db.run(`INSERT INTO orders
+       VALUES ('2-2-2020', 2, 20000, 1, 'joe', 'beirut'); `) */   
+/*      await db.run(`INSERT INTO orders
         ("orders_date", "orders_quantity", "orders_amount", "product_product_id", "client_name", "area")
-        VALUES ('2-1-2020', 2, 20000, 2, 'najwa', 'zahle'); `) */   
+        VALUES ('2-1-2020', 2, 20000, 2, 'najwa', 'zahle'); `) */    
 
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'1.png')`)
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (2,'2.png')`)
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'3.png')`)
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (3,'4.png')`)
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (4,'5.png')`)
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (5,'6.png')`)
-//   await db.run(`insert into image ("product_product_id" ,"image_name") values (6,'7.png')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'image2.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (2,'image2.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (1,'image3.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (3,'background_contact_2.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (4,'background_contact_3.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (5,'bb9ada3f3064dc11b8760688a02e7982.jpg')`)
+//   await db.run(`insert into image ("product_product_id" ,"image_name") values (6,'Bohemia-Alloy-Multi-layers-Gold-Silver-Beads-Sequins-3-Pieces-Set-Bracelet-For-Women-Jewelry-Foot-Ch-32946889582-8222-843x800.jpeg')`)
 
 
 
