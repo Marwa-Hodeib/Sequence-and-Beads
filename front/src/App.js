@@ -13,7 +13,8 @@ class App extends Component {
       this.state = { 
         collection:[],
         product:[],
-        image:[]
+        image:[],
+        product_id_purchase: ""
       };
     }
 
@@ -57,11 +58,29 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
+  getOrder = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/order");
+      const result = await response.json();
+      if (result.success) {
+        this.setState({ image: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
+  purchase (e){
+
+    return this.setState({product_id_purchase:e});
+  }
 
   async componentDidMount() {
     await this.getCollectionList();
     await this.getproductList();
     await this.getimage();
+    await this.getOrder();
   }
 
   render() {
@@ -73,7 +92,7 @@ class App extends Component {
               <Route exact path="/"  component={() => <Home collection={this.state.collection.filter(obj => obj.collection_flag)}  product={this.state.product} image={this.state.image}/>}/>
               <Route path="/about"  component={About} />
               <Route path="/contact" component={Contact} />
-              <Route  path="/gallery" component={() => <Gallery test={this.state.collection} />} />
+              <Route  path="/gallery" component={() => <Gallery test={this.state.collection} purchase ={this.purchase}/>} />
             </Switch>
           </div>
         </BrowserRouter>
