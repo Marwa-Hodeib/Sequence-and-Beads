@@ -2,6 +2,8 @@ import React from "react";
 import "./modalWindow.css";
 import Image1 from "../../assets/images/image1.jpg"
 import { Button, InputGroup } from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
+import Contact from "../../pages/contact_us /contact_us";
 export class modalWindow extends React.Component {
   state = {
     showPrice: true,
@@ -18,6 +20,9 @@ export class modalWindow extends React.Component {
       flag:1
     });
   };
+  handleprops=()=>{
+    this.props.purchase(this.props.product[0].product_id, this.props.product[0].product_price);
+  }
   async componentDidMount(){
      this.setState({
        category:this.props.category.filter(obj=> obj.category_id == this.props.product[0].category_category_id),
@@ -87,8 +92,10 @@ export class modalWindow extends React.Component {
             </p>
           </InputGroup.Append>
           <InputGroup.Append class="modalWindow_purshase">
-            <Button class="modalWindow_purshase" variant="success">
-              <strong>Purshase</strong>
+            <Button class="modalWindow_purshase" variant="success" onClick={()=>this.handleprops()} >
+            <NavLink to="/contact">
+            <strong>Purchase</strong>
+              </NavLink>
             </Button>
           </InputGroup.Append>
         </div>

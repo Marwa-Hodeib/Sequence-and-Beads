@@ -31,7 +31,7 @@ function Header(props){
           </a>
           <a>
             <span>
-              <NavLink to="/contact" className="header_navlink">
+              <NavLink to="/contact" className="header_navlink" >
                 Contact us
               </NavLink>
             </span>

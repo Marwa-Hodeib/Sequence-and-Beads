@@ -14,7 +14,9 @@ class App extends Component {
         collection:[],
         product:[],
         image:[],
-        product_id_purchase: ""
+        order:[],
+        product_id_purchase:0,
+        product_price_purchase:0
       };
     }
 
@@ -76,7 +78,7 @@ class App extends Component {
       const response = await fetch("http://localhost:8080/order");
       const result = await response.json();
       if (result.success) {
-        this.setState({ image: result.result, error: "" });
+        this.setState({ order: result.result, error: "" });
       } else {
         this.setState({ error: result.message });
       }
@@ -84,17 +86,20 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
-  purchase (e){
-
-    return this.setState({product_id_purchase:e});
+  purchase= (e)=>{
+      this.setState({product_id_purchase:e, product_price_purchase:e});
   }
+
 
   async componentDidMount() {
     await this.getCollectionList();
     await this.getproductList();
     await this.getimage();
     await this.getCategoryList();
+    await this.getOrder();
   }
+
+  
 
   render() {
     return (
@@ -116,18 +121,15 @@ class App extends Component {
                 )}
               />
               <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route
-                path="/gallery"
-                component={() => (
-                  <Gallery
-                    product={this.state.product}
-                    image={this.state.image}
-                    collection={this.state.collection}
-                    category={this.state.category}
-                  />
-                )}
-              />
+              <Route path="/contact" 
+               component={() => (
+                <Contact
+                  product_id={this.state.product_id_purchase}
+                  product_price={this.state.product_price_purchase}
+                />
+              )}
+            />
+              
               <Route
                 path="/admin/"
                 component={() => (
@@ -145,6 +147,8 @@ class App extends Component {
                     image={this.state.image}
                     collection={this.state.collection}
                     category={this.state.category}
+                    purchase = {this.purchase}
+                    
                   />
                 )}
               />

@@ -29,7 +29,7 @@ function Card(props) {
           </div>
         </div>
       </div>
-      <Modal
+      <Modal 
         size="lg"
         show={show}
         onHide={() => setShow(false)}
@@ -47,6 +47,7 @@ function Card(props) {
             product={props.product}
             category={props.category}
             collection={props.collection}
+            purchase={props.purchase}
           />
         </Modal.Body>
       </Modal>
