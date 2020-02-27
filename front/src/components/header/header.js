@@ -37,14 +37,6 @@ function Header(props){
             </span>
           </a>
         </div>
-        <div className="header_search">
-          <div>
-            <FormControl type="text" placeholder="Search" size="sm" />
-          </div>
-          <div>
-            <Button variant="outline-secondary">Search</Button>
-          </div>
-        </div>
       </div>
     
   );
