@@ -31,19 +31,11 @@ function Header(props){
           </a>
           <a>
             <span>
-              <NavLink to="/contact" className="header_navlink">
+              <NavLink to="/contact" className="header_navlink" >
                 Contact us
               </NavLink>
             </span>
           </a>
-        </div>
-        <div className="header_search">
-          <div>
-            <FormControl type="text" placeholder="Search" size="sm" />
-          </div>
-          <div>
-            <Button variant="outline-secondary">Search</Button>
-          </div>
         </div>
       </div>
     

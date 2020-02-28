@@ -3,7 +3,7 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content:space-evenly;
-    align-items: flex-end;
+    align-items: flex-start;
     background-image: url("../../assets/images/background_contact_4");
     background-repeat: no-repeat;
     background-size: cover;
@@ -52,14 +52,14 @@ label:first-child
 }
 #contact_form_container
 {
-    margin-right:10%;
+    margin-left:7%;
 }
 .contact_body_container h1
 {
-    margin-right: 14%;
+    margin-left: 12%;
 }
 .contact_body_container p
 {
     width:300px;
-    margin-right:11%;
+    margin-left: 7%;
 }

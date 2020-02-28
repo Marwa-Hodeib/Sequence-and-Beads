@@ -2,6 +2,8 @@ import React from "react";
 import "./modalWindow.css";
 import Image1 from "../../assets/images/image1.jpg";
 import { Button, InputGroup } from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
+import Contact from "../../pages/contact_us /contact_us";
 export class modalWindow extends React.Component {
   state = {
     showPrice: true,
@@ -18,16 +20,14 @@ export class modalWindow extends React.Component {
       flag: 1
     });
   };
-  async componentDidMount() {
-    this.setState({
-      category: this.props.category.filter(
-        obj => obj.category_id == this.props.product[0].category_category_id
-      ),
-      collection: this.props.collection.filter(
-        obj =>
-          obj.collection_id == this.props.product[0].collection_collection_id
-      )
-    });
+  handleprops=()=>{
+    this.props.purchase(this.props.product[0].product_id, this.props.product[0].product_price);
+  }
+  async componentDidMount(){
+     this.setState({
+       category:this.props.category.filter(obj=> obj.category_id == this.props.product[0].category_category_id),
+       collection:this.props.collection.filter(obj=> obj.collection_id == this.props.product[0].collection_collection_id),
+    })
   }
   render() {
     return (
@@ -93,7 +93,9 @@ export class modalWindow extends React.Component {
                   ? "modalWindow_priceOff"
                   : "modalWindow_priceOn"
               }
-              onClick={() => this.setState({ shown: !this.state.shown })}
+              onClick={() => t font-family: 'Dancing Script',
+    'Indie Flower',
+    cursive;his.setState({ shown: !this.state.shown })}
             >
               <strong>Show Price</strong>
             </Button>
@@ -108,8 +110,10 @@ export class modalWindow extends React.Component {
             </p>
           </InputGroup.Append>
           <InputGroup.Append class="modalWindow_purshase">
-            <Button class="modalWindow_purshase" variant="success">
-              <strong>Purchase</strong>
+            <Button class="modalWindow_purshase" variant="success" onClick={()=>this.handleprops()} >
+            <NavLink to="/contact">
+            <strong>Purchase</strong>
+              </NavLink>
             </Button>
           </InputGroup.Append>
         </div>

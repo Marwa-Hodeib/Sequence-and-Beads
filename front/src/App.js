@@ -8,14 +8,17 @@ import Gallery from "./pages/gallery/gallery";
 import EditProduct from "./pages/admin//editProduct";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collection: [],
-      product: [],
-      image: []
-    };
-  }
+    constructor(props) {
+      super(props);
+      this.state = { 
+        collection:[],
+        product:[],
+        image:[],
+        order:[],
+        product_id_purchase:0,
+        product_price_purchase:0
+      };
+    }
 
   getCollectionList = async () => {
     try {
@@ -70,13 +73,33 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
+  getOrder = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/order");
+      const result = await response.json();
+      if (result.success) {
+        this.setState({ order: result.result, error: "" });
+      } else {
+        this.setState({ error: result.message });
+      }
+    } catch (err) {
+      this.setState({ error: err });
+    }
+  };
+  purchase= (e)=>{
+      this.setState({product_id_purchase:e, product_price_purchase:e});
+  }
+
 
   async componentDidMount() {
     await this.getCollectionList();
     await this.getproductList();
     await this.getimage();
     await this.getCategoryList();
+    await this.getOrder();
   }
+
+  
 
   render() {
     return (
@@ -98,18 +121,15 @@ class App extends Component {
                 )}
               />
               <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route
-                path="/gallery"
-                component={() => (
-                  <Gallery
-                    product={this.state.product}
-                    image={this.state.image}
-                    collection={this.state.collection}
-                    category={this.state.category}
-                  />
-                )}
-              />
+              <Route path="/contact" 
+               component={() => (
+                <Contact
+                  product_id={this.state.product_id_purchase}
+                  product_price={this.state.product_price_purchase}
+                />
+              )}
+            />
+              
               <Route
                 path="/admin/"
                 component={() => (
@@ -127,6 +147,8 @@ class App extends Component {
                     image={this.state.image}
                     collection={this.state.collection}
                     category={this.state.category}
+                    purchase = {this.purchase}
+                    
                   />
                 )}
               />

@@ -44,6 +44,7 @@ class Gallery extends React.Component {
               )}
               category={this.props.category}
               collection={this.props.collection}
+              purchase={this.props.purchase}
             />
           ))}
         </div>
