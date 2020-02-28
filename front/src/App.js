@@ -16,7 +16,6 @@ class App extends Component {
         image:[],
         order:[],
         product_id_purchase:0,
-        product_price_purchase:0
       };
     }
 
@@ -125,7 +124,9 @@ class App extends Component {
                component={() => (
                 <Contact
                   product_id={this.state.product_id_purchase}
-                  product_price={this.state.product_price_purchase}
+                  product_price={this.state.product.filter(
+                    obj => obj.product_id==this.state.product_id_purchase
+                  )}
                 />
               )}
             />

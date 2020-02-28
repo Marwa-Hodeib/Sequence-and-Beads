@@ -35,30 +35,23 @@ class Form extends Component
         {
             this.setState({purchase_product_id:this.props.product_id, orders_amount:this.props.product_price})
         }
-        handleSubmit(event)
-            {
-                event.preventDefault();
-                console.log(this.state);
-                console.log(this.props.product_id);
-                console.log(this.props.product_price);
-                fetch('http://localhost:8080/create/order',{
-                method: "POST",
-                body: JSON.stringify(this.state),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                }).then(
-                (response) => (response.json())
-                ).then((response)=>{
-                if (response.status === 'success'){
-                alert("Message Sent."); 
-                this.resetForm()
-                }else if(response.status === 'fail'){
-                alert("Message failed to send.")
+        async handleSubmit(event)
+        {
+            event.preventDefault();
+           
+            try {
+                const response = await fetch(`http://localhost:8080/order/create?date=${this.state.date}&quantity=${JSON.parse(this.state.orders_quantity)}&amount=${(JSON.parse(this.state.orders_quantity))*(JSON.parse(this.props.product_price[0].product_price))}&productID=${JSON.parse(this.state.purchase_product_id)}&clientName=${this.state.client_name}&area=${this.state.area}`);
+                const result = await response.json();
+                if (result.success) {
+                console.log("done")
+                alert("Your order has been submitted");
+                } else {
+                console.log("error")
                 }
-            })
-            } 
+            } catch (err) {
+                console.log(err)
+                    } 
+                }
 
     render()
     {

@@ -93,9 +93,7 @@ export class modalWindow extends React.Component {
                   ? "modalWindow_priceOff"
                   : "modalWindow_priceOn"
               }
-              onClick={() => t font-family: 'Dancing Script',
-    'Indie Flower',
-    cursive;his.setState({ shown: !this.state.shown })}
+              onClick={() => this.setState({ shown: !this.state.shown })}
             >
               <strong>Show Price</strong>
             </Button>
