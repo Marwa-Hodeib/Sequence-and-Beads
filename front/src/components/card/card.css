@@ -71,12 +71,20 @@
 
 .card {
   margin: 16px;
-  font-family: sans-serif;
-  border: 0px transparent none;
-}
-
-.Description {
   font-family: 'Dancing Script',
     'Indie Flower',
     cursive;
+  border: 0px transparent none;
+}
+
+.description_header {
+  font-family: 'Dancing Script',
+    'Indie Flower',
+    cursive;
+}
+
+.card .card_image {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

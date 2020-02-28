@@ -4,9 +4,12 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  font-family: sans-serif;
+  font-family: 'Dancing Script',
+    'Indie Flower',
+    cursive;
   font-size: 1.1em;
 }
+
 .mainImgContainer {
   min-height: 350px;
   width: 80%;
@@ -15,11 +18,13 @@
   align-items: center;
   font: 1em sans-serif;
 }
+
 .modalWindow_mainImg {
   max-height: 100%;
   max-width: 100%;
   margin: auto;
 }
+
 .modalWindow_container1 {
   width: 60%;
   display: flex;
@@ -27,40 +32,51 @@
   justify-content: center;
   align-items: center;
 }
+
 .modalWindow_container2 {
-  width: 35%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
   margin-top: 40px;
 }
+
 .modalWindow_miniImgContainer {
   display: flex;
   flex-direction: row;
 }
+
 .modalWindow_miniImg {
   width: 70px;
   height: 70px;
   background-color: black;
 }
-.modalWindow > td {
+
+.modalWindow>td {
   width: 120px;
 }
+
 .modalWindow_priceOn {
   font-size: 1.5em;
   display: inline;
   text-align: center;
   margin-right: 23px;
+  /*  font-family: 'Dancing Script',
+    'Indie Flower',
+    cursive; */
 }
+
 .modalWindow_priceOff {
   font-size: 1.5em;
   display: none;
   text-align: center;
 }
-.modalWindow > table {
+
+.modalWindow>table {
   margin-top: 100px;
 }
+
 .modalWindow_purshase {
   margin-bottom: 17px;
   margin-right: 3px;
@@ -74,40 +90,49 @@
     flex-wrap: wrap;
     flex-direction: row;
   }
+
   .modalWindow_mainImg {
     height: 150px;
     width: 100%;
   }
+
   .modalWindow_miniImg {
     width: 100px;
     height: 100px;
     background-color: black;
   }
+
   .modalWindow_container2 {
     margin-left: 15%;
     margin-top: 30px;
     margin-bottom: 30px;
     align-items: center;
   }
+
   .modalWindow_miniImgContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 50px;
   }
-  .modalWindow > table {
+
+  .modalWindow>table {
     margin-top: 20px;
   }
+
   .modalWindow_priceOn {
     margin-right: 0px;
   }
-  .modalWindow > table {
+
+  .modalWindow>table {
     margin-top: 0px;
   }
+
   .modalWindow_purshase {
     margin-bottom: 00px;
     margin-right: 0px;
   }
+
   .mainImgContainer {
     min-height: 100px;
     min-width: 100px;
