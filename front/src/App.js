@@ -19,7 +19,17 @@ class App extends Component {
         collection_selected:""
       };
     }
+/* 
+In the state we create for each table fetched from the database a state element in order to save the fetched data in it and passed to other pages.
 
+Product_id_purchase is created in order to save it is value once the user click on the purchase button in the modal window component in the gallery page and passed it to the contact us page and then to the form component.
+
+Collection_selected is created in order to save the value that is related to the collection component in the home page, and once the user press on one of the images, he/she will be redirected to the gallery page with a filter applied, so this value is passed to the filter component in order to control the showed items in the gallery pages.
+*/
+
+/*
+The following function are used to fetch the required data from the data base
+*/
   getCollectionList = async () => {
     try {
       const response = await fetch("http://localhost:8080/collection");
@@ -59,7 +69,6 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
-
   getimage = async () => {
     try {
       const response = await fetch("http://localhost:8080/image");
@@ -86,8 +95,13 @@ class App extends Component {
       this.setState({ error: err });
     }
   };
+
+  /*
+  Purchase function is used to pass the product_id of the item where the user clicked on the purchase button in order to purchase it.
+  This function is used to passing value from the modal window component to its parent the card component to the gallery page to the app.js in order to be passed to the contact us page and then to the form component  
+  */ 
   purchase= (e)=>{
-      this.setState({product_id_purchase:e, product_price_purchase:e});
+      this.setState({product_id_purchase:e});
   }
 
   handle= (e)=>{
@@ -112,6 +126,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
+              {/* */}
               <Route
                 exact
                 path="/"
@@ -126,6 +141,9 @@ class App extends Component {
                 )}
               />
               <Route path="/about" component={About} />
+
+              {/*For the Contact page we are passing 2 props. The product_id which is detected by the purchase funtion and stored in the state as product_id_purchase in order to display a form component with a subject selected purchase without any other option 
+              and the product_price which is a filter of the product table based on the product_id detected by the purchase function and then passing its value to the contact us and then to the state to be multiplied by the quantity that the user had selected and on submit the value of the amount is stored in the database in the order table */}
               <Route path="/contact" 
                component={() => (
                 <Contact
@@ -146,6 +164,9 @@ class App extends Component {
                   />
                 )}
               />
+              {/*For the gallery we are passing as props that contains the product, image, collection and category tables.
+              in addition we are passing purchase which detect the product id of the item where the event of clicking on the purchase button occurs
+              handle is a function that passes the collection selected at the home page in order to pass it to the gallery filter component to be able to see the items filtered*/}
               <Route
                 path="/gallery"
                 component={() => (

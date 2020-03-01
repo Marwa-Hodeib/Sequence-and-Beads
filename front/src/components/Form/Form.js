@@ -17,24 +17,37 @@ class Form extends Component
             area:''
         }
     }
-         onNameChange(event)
+        /*For the Contact page we are passing 2 props from the contact page. 
+        1- The product_id which is detected by the purchase funtion and stored in the state as product_id_purchase in order to display a form component with a subject selected purchase without any other option 
+        2- The product_price which is a filter of the product table based on the product_id detected by the purchase function and then passing its value to the contact us and then to the state to be multiplied by the quantity that the user had selected and on submit the value of the amount is stored in the database in the order table */
+        /* onNameChange functon will set the state of the client_name in order to save what the user entered */
+        onNameChange(event)
         {
             this.setState({client_name:event.target.value})
         }
+        /* onQuantityChange functon will set the state of the orders_quantity in order to save what the user entered */
         onQuantityChange(event)
         {
             this.setState({orders_quantity:event.target.value})
         }
+        /* onAreaChange functon will set the state of the area in order to save what the user entered */
         onAreaChange(event)
         {
             this.setState({area:event.target.value})
         }
-        
+        /* onChange functon will set the state of the date in order to save the exact date when the user press the submit button */
         onChange = date => this.setState({ date })
+        /* the product_id props passed to the form component by the contact page will be setted to the purchase_product_id in order to be used once the form will be submitted*/
         componentWillMount()
         {
-            this.setState({purchase_product_id:this.props.product_id, orders_amount:this.props.product_price})
+            this.setState({purchase_product_id:this.props.product_id})
         }
+        /*The handleSubmit function will fetch the data entered in the form component and pass it to the database in the order table
+        the amount isn't stored in the state, instead the multiplication between the orders_quantity from the state and the product_price passed as props will be carried out in the url 
+        since the state elements are objects so what we want as number should be parsed in order to meet the type requirement in the database
+        if the order is submitted successfully, an alert window will appear to inform the user about the submittion 
+        else an alert window will inform the user that his order is not submitted successfully
+        */
         async handleSubmit(event)
         {
             event.preventDefault();
@@ -49,7 +62,8 @@ class Form extends Component
                 console.log("error")
                 }
             } catch (err) {
-                console.log(err)
+                console.log(err);
+                alert("\t\tYour order has not been submitted! \n Please refill your order with all the exact information.");
                     } 
                 }
 
@@ -64,7 +78,7 @@ class Form extends Component
                     
                     <div className="contact_form_group">
                         <label htmlFor="fname" className="contact_form_group_item">First Name</label>
-                        <input id="fname" type="text" className="contact_form_control" placeholder="first name" className="contact_form_group_item" value={this.state.client_name} onChange={this.onNameChange.bind(this)}/>
+                        <input id="fname" type="text" placeholder="first name" className="contact_form_group_item" value={this.state.client_name} onChange={this.onNameChange.bind(this)}/>
                     </div>
 
                     <div className="contact_form_group">
@@ -74,7 +88,7 @@ class Form extends Component
 
                     <div className="contact_form_group">
                         <label htmlFor="email" className="contact_form_group_item">Email</label>
-                        <input id="email" type="email" className="contact_form_control" aria-describedby="emailHelp" placeholder="abc@gmail.com"/>
+                        <input id="email" type="email" aria-describedby="emailHelp" placeholder="abc@gmail.com"/>
                     </div>
 
                     <div className="contact_form_group">
