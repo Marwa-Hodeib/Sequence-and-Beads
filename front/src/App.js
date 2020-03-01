@@ -16,6 +16,7 @@ class App extends Component {
         image:[],
         order:[],
         product_id_purchase:0,
+        collection_selected:""
       };
     }
 
@@ -89,6 +90,11 @@ class App extends Component {
       this.setState({product_id_purchase:e, product_price_purchase:e});
   }
 
+  handle= (e)=>{
+    console.log("app",e)
+    this.setState({collection_selected:e});
+}
+
 
   async componentDidMount() {
     await this.getCollectionList();
@@ -149,6 +155,7 @@ class App extends Component {
                     collection={this.state.collection}
                     category={this.state.category}
                     purchase = {this.purchase}
+                    handle={this.handle}
                     
                   />
                 )}

@@ -9,14 +9,26 @@ import {
   InputGroup
 } from "react-bootstrap";
 
+
 class searchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       collection: [],
-      category: []
+      category: [],
+      collection_select:""
     };
   }
+
+  select=(event) =>{
+    let a=this.props.collection.filter(
+      obj => obj.collection_name==event.target.innerText
+    )
+     this.props.handle(a[0].collection_id) 
+  }
+ componentDidMount(){
+    this.props.handle(this.state.collection_select)
+  } 
 
   componentDidMount() {
     this.setState({
@@ -44,7 +56,7 @@ class searchBar extends React.Component {
             id="input-group-dropdown-2"
           >
             {this.state.collection.map((image, index) => (
-              <Dropdown.Item href="#">{image.collection_name}</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={this.select} value={image}>{image.collection_name}</Dropdown.Item>
             ))}
           </DropdownButton>
           <DropdownButton

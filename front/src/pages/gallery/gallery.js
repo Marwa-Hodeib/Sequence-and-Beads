@@ -9,7 +9,9 @@ import { Button, Modal } from "react-bootstrap";
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      collection_selected:""
+    };
   }
 
   /*   async componentDidMount() {
@@ -23,6 +25,9 @@ class Gallery extends React.Component {
       
     </div> )
   } */
+
+
+
   render() {
     return (
       <div className="gallery">
@@ -31,6 +36,9 @@ class Gallery extends React.Component {
           <Filter
             collection={this.props.collection}
             category={this.props.category}
+              handle={this.handle}
+              product={this.props.product}
+
           />
         </div>
         <div className="gallery_CardsContainer">
