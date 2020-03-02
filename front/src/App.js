@@ -20,7 +20,7 @@ class App extends Component {
       };
     }
 /* 
-In the state we create for each table fetched from the database a state element in order to save the fetched data in it and passed to other pages.
+In the state we create for each table fetched from the database a state element in order to save the fetched data in it and pass it to other pages.
 
 Product_id_purchase is created in order to save it is value once the user click on the purchase button in the modal window component in the gallery page and passed it to the contact us page and then to the form component.
 
@@ -28,7 +28,7 @@ Collection_selected is created in order to save the value that is related to the
 */
 
 /*
-The following function are used to fetch the required data from the data base
+The following function are used to fetch the required data from the data base and saving them in state
 */
   getCollectionList = async () => {
     try {
@@ -105,7 +105,6 @@ The following function are used to fetch the required data from the data base
   }
 
   handle= (e)=>{
-    console.log("app",e)
     this.setState({collection_selected:e});
 }
 
