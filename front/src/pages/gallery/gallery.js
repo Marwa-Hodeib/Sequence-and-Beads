@@ -36,20 +36,20 @@ class Gallery extends React.Component {
           <Filter
             collection={this.props.collection}
             category={this.props.category}
-              handle={this.handle}
-              product={this.props.product}
+            handle_collection={this.props.handle_collection}
+            handle_category={this.props.handle_category}
+            product={this.props.product}
+            initialproduct={this.props.initialproduct}
 
           />
         </div>
         <div className="gallery_CardsContainer">
-          {this.props.image.map((image, index) => (
+          {this.props.product.map((image, index) => (
             <Card
               image={this.props.image.filter(
-                obj => obj.product_product_id == image.product_product_id
+                obj => obj.product_product_id == image.product_id
               )}
-              product={this.props.product.filter(
-                obj1 => obj1.product_id == image.product_product_id
-              )}
+              product={image}
               category={this.props.category}
               collection={this.props.collection}
               purchase={this.props.purchase}

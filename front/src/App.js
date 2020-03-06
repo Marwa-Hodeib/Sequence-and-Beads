@@ -16,7 +16,9 @@ class App extends Component {
         image:[],
         order:[],
         product_id_purchase:0,
-        collection_selected:""
+        collection_selected:[],
+        category_selected:"", 
+        filter_applied : false
       };
     }
 /* 
@@ -104,8 +106,11 @@ The following function are used to fetch the required data from the data base an
       this.setState({product_id_purchase:e});
   }
 
-  handle= (e)=>{
-    this.setState({collection_selected:e});
+  handle_collection= (e)=>{
+    this.setState({collection_selected:e, filter_applied:true});
+}
+handle_category= (e)=>{
+  this.setState({category_selected:e});
 }
 
 
@@ -114,10 +119,8 @@ The following function are used to fetch the required data from the data base an
     await this.getproductList();
     await this.getimage();
     await this.getCategoryList();
-    await this.getOrder();
+    await this.getOrder(); 
   }
-
-  
 
   render() {
     return (
@@ -166,20 +169,23 @@ The following function are used to fetch the required data from the data base an
               {/*For the gallery we are passing as props that contains the product, image, collection and category tables.
               in addition we are passing purchase which detect the product id of the item where the event of clicking on the purchase button occurs
               handle is a function that passes the collection selected at the home page in order to pass it to the gallery filter component to be able to see the items filtered*/}
-              <Route
+               <Route
                 path="/gallery"
                 component={() => (
                   <Gallery
-                    product={this.state.product}
+                    product={this.state.filter_applied?this.state.collection_selected:this.state.product}
+                    /////////////////////////
+                    initialproduct={this.state.product}
                     image={this.state.image}
                     collection={this.state.collection}
                     category={this.state.category}
                     purchase = {this.purchase}
-                    handle={this.handle}
+                    handle_collection={this.handle_collection}
+                    handle_category={this.handle_category}
                     
                   />
                 )}
-              />
+              /> 
             </Switch>
           </div>
         </BrowserRouter>
