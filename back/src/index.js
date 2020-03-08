@@ -433,7 +433,7 @@ const start = async () => {
     app.get("/product/id/:id", async (req, res,next) => {
       try{
       const result = await controller.getproductById(req.params.id);
-      res.json({sucess:true,result});
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -443,7 +443,7 @@ const start = async () => {
     app.get("/product/name/:ID", async (req, res,next)=> {
       try{
       const result = await controller.getproductByName(req.params.ID);
-      res.json(result);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -452,7 +452,7 @@ const start = async () => {
     app.get("/product/category/:ID", async (req, res,next)=> {
       try{
       const result = await controller.getproductByCategory(req.params.ID);
-      res.json(result);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -461,7 +461,7 @@ const start = async () => {
     app.get("/product/collection/:ID", async (req, res,next)=> {
       try{
       const result = await controller.getproductByCollection(req.params.ID);
-      res.json(result);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -482,7 +482,7 @@ const start = async () => {
       try{
       const result = await
       controller.deleteProductByID(req.params.ID);
-      res.json(result);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -492,7 +492,7 @@ const start = async () => {
       try{
       const result = await
       controller.deleteProductByName (req.params.name);
-      res.json(result);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -502,7 +502,7 @@ const start = async () => {
       try{
       const result = await
       controller.deleteProductByCollection (req.params.product);
-      res.json(result);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }
@@ -512,7 +512,18 @@ const start = async () => {
       try{
       const result = await
       controller.deleteProductByCategory (req.params.product);
-      res.json(result);
+      res.json({success:true,result});
+      }catch(err){
+        next(err);
+      }
+    });
+
+     ////////////*******Join collection vs category********////////////
+     app.get("/join/",async (req,res,next)=>{
+      try{
+      const result = await 
+      controller.categoryCollections(req.query);
+      res.json({success:true,result});
       }catch(err){
         next(err);
       }

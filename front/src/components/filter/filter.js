@@ -22,30 +22,33 @@ class searchBar extends React.Component {
 
 
    select_collection=(event) =>{
-    event.preventDefault();
-     let coll_id=this.props.collection.filter(
-      obj => obj.collection_name==event.target.innerText
-    ) 
-    let product=this.props.initialproduct.filter(
-      obj => obj.collection_collection_id==coll_id[0].collection_id
-    )
-    this.props.handle_collection(product);
- /*   console.log("ss",this.state.product.filter(
-       obj => obj.collection_collection_id==coll_id[0].collection_id
-    )) */
-    console.log(product)
-    console.log("p",this.props.product)
-/*     console.log("props",this.props.product); */
+    if(event.target.innerText=="All Collection"){
+      this.props.handle_collection_noFiltered();
+    }
+    else{
+      let coll_id=this.props.collection.filter(
+        obj => obj.collection_name==event.target.innerText
+      )
+      let product=this.props.initialproduct.filter(
+        obj => obj.collection_collection_id==coll_id[0].collection_id
+        )
+        this.props.handle_collection(product);
+    }
  }
 
   select_category=(event) =>{
+    if(event.target.innerText=="All Category"){
+       this.props.handle_category_noFiltered();
+    }
+    else{
     let coll_id=this.props.category.filter(
-     obj => obj.category_name==event.target.innerText
-   ) 
-   let product=this.props.product.filter(
-     obj => obj.category_category_id==coll_id[0].category_id
-   )
-   this.props.handle_category(product);
+      obj => obj.category_name==event.target.innerText
+    )
+    let product=this.props.initialproduct.filter(
+      obj => obj.category_category_id==coll_id[0].category_id
+      )
+      this.props.handle_category(product);
+    }
  } 
 
   async componentDidMount() {
@@ -73,7 +76,8 @@ class searchBar extends React.Component {
             variant="outline-secondary"
             title="Collection"
             id="input-group-dropdown-2"
-          >
+          > 
+            <Dropdown.Item href="#" onClick={this.select_collection} value="AllCollection"> All Collection</Dropdown.Item>
             {this.state.collection.map((image, index) => (
               <Dropdown.Item href="#" onClick={this.select_collection} value={image}>{image.collection_name}</Dropdown.Item>
             ))}
@@ -84,6 +88,7 @@ class searchBar extends React.Component {
             title="Category"
             id="input-group-dropdown-2"
           >
+            <Dropdown.Item href="#" onClick={this.select_category} value="AllCategory"> All Category</Dropdown.Item>
             {this.state.category.map((image, index) => (
               <Dropdown.Item href="#" onClick={this.select_category} value={image}>{image.category_name}</Dropdown.Item>
             ))}

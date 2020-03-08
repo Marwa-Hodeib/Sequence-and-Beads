@@ -50,6 +50,8 @@ export default class Collection extends React.Component {
                       : ""
                   }")`
                 }}
+                /* onClick={this.props.handle_collection(this.state.product)} */
+                
               ></div>
               <div className="card-name">
                 <div className="collection_row1_div_text">
@@ -73,7 +75,8 @@ export default class Collection extends React.Component {
                         ? this.handleimage(this.state.product[0])
                         : ""
                     }")`
-                  }}
+                  }
+                }
                 ></div>
                 <div className="card-name">
                   <div className="collection_row1_div_text">
@@ -99,7 +102,6 @@ export default class Collection extends React.Component {
                     }")`
                   }}
                 ></div>
-                {/* {JSON.stringify(this.state.product[1])} */}
                 <div className="card-name">
                   <div className="collection_row1_div_text">
                     <h2>

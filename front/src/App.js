@@ -17,8 +17,11 @@ class App extends Component {
         order:[],
         product_id_purchase:0,
         collection_selected:[],
-        category_selected:"", 
-        filter_applied : false
+        category_selected:[], 
+        filter_collection : false,
+        filter_category : false,
+        both:[],
+        both_flag:false
       };
     }
 /* 
@@ -98,6 +101,24 @@ The following function are used to fetch the required data from the data base an
     }
   };
 
+  join = async () => {
+    if(this.state.filter_collection && this.state.filter_category){
+      this.setState({both_flag:false});
+      let collection=this.state.collection_selected[0].collection_collection_id;
+      let category=this.state.category_selected[0].category_category_id;
+      try {
+        const response = await fetch(`http://localhost:8080/join?cat=${category}&coll=${collection}`);
+        const result = await response.json();
+        if (!this.state.both_flag && result.success) {console.log("both",result)
+          this.setState({ both: result.result,both_flag:true});
+        }
+      } catch (err) {
+        this.setState({ error: err });
+      } 
+    }
+      
+  };
+
   /*
   Purchase function is used to pass the product_id of the item where the user clicked on the purchase button in order to purchase it.
   This function is used to passing value from the modal window component to its parent the card component to the gallery page to the app.js in order to be passed to the contact us page and then to the form component  
@@ -107,11 +128,19 @@ The following function are used to fetch the required data from the data base an
   }
 
   handle_collection= (e)=>{
-    this.setState({collection_selected:e, filter_applied:true});
-}
-handle_category= (e)=>{
-  this.setState({category_selected:e});
-}
+    this.setState({collection_selected:e, filter_collection:true});
+  }
+  handle_collection_noFiltered= () =>{
+    this.setState({filter_collection:false,both_flag:false});
+  }
+  handle_category= (e)=>{
+    this.setState({category_selected:e,filter_category: true});
+  }
+  handle_category_noFiltered= () =>{
+    this.setState({filter_category:false,both_flag:false});
+  }
+  
+
 
 
   async componentDidMount() {
@@ -120,6 +149,9 @@ handle_category= (e)=>{
     await this.getimage();
     await this.getCategoryList();
     await this.getOrder(); 
+  }
+  async componentWillUpdate() {
+    await this.join();
   }
 
   render() {
@@ -139,6 +171,7 @@ handle_category= (e)=>{
                     )}
                     product={this.state.product}
                     image={this.state.image}
+                    handle_collection={this.handle_collection}
                   />
                 )}
               />
@@ -173,15 +206,25 @@ handle_category= (e)=>{
                 path="/gallery"
                 component={() => (
                   <Gallery
-                    product={this.state.filter_applied?this.state.collection_selected:this.state.product}
-                    /////////////////////////
+                    product=
+                    {(this.state.filter_collection && !this.state.filter_category)?
+                      this.state.collection_selected:
+                      (!this.state.filter_collection && this.state.filter_category)?
+                      this.state.category_selected:
+                      (!this.state.filter_collection && !this.state.filter_category)?
+                      this.state.product:
+                      (this.state.filter_collection && this.state.filter_category)?
+                      this.state.both:
+                      ""}
                     initialproduct={this.state.product}
                     image={this.state.image}
                     collection={this.state.collection}
                     category={this.state.category}
                     purchase = {this.purchase}
                     handle_collection={this.handle_collection}
+                    handle_collection_noFiltered={this.handle_collection_noFiltered}
                     handle_category={this.handle_category}
+                    handle_category_noFiltered={this.handle_category_noFiltered}
                     
                   />
                 )}

@@ -49,6 +49,7 @@ class Home extends Component {
             collection={this.state.flag == 1 ? this.state.collection : ""}
             product={this.state.flag == 1 ? this.state.product : ""}
             image={this.state.flag == 1 ? this.state.image : ""}
+            
           />
         </NavLink>
         

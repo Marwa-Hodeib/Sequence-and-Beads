@@ -1099,6 +1099,26 @@ const updateImage = async (id,props) =>{
       throw new Error("not found");}
     }
 
+    //////*********JOIN Collection vs Category*********//////
+    const categoryCollections = async (props) => {
+      let {cat,coll}=props;
+      cat=parseInt(cat);
+      coll=parseInt(coll);
+      if(!isNaN(coll) && !isNaN(cat)){
+      let query=`select * from product  where category_category_id=${cat} and collection_collection_id=${coll}`;
+      try {
+        const rows = await db.all(query);
+        if (rows.length > 0) {
+          return rows;
+        }
+        throw new Error("product is empty!");
+      } catch (err) {
+        throw new Error("Could not retrieve list of product");
+      } 
+    }
+    };
+
+
   const controller = {
     /*COLLECTION*/
     /*CREATE*/
@@ -1187,6 +1207,8 @@ const updateImage = async (id,props) =>{
     deleteProductByName,
     deleteProductByCategory,
     deleteProductByCollection,
+    /*Join collection vs category*/
+    categoryCollections
 
   }
   return controller;
