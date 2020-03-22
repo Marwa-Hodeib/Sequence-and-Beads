@@ -101,23 +101,7 @@ The following function are used to fetch the required data from the data base an
     }
   };
 
-  join = async () => {
-    if(this.state.filter_collection && this.state.filter_category){
-      this.setState({both_flag:false});
-      let collection=this.state.collection_selected[0].collection_collection_id;
-      let category=this.state.category_selected[0].category_category_id;
-      try {
-        const response = await fetch(`http://localhost:8080/join?cat=${category}&coll=${collection}`);
-        const result = await response.json();
-        if (!this.state.both_flag && result.success) {console.log("both",result)
-          this.setState({ both: result.result,both_flag:true});
-        }
-      } catch (err) {
-        this.setState({ error: err });
-      } 
-    }
-      
-  };
+     
 
   /*
   Purchase function is used to pass the product_id of the item where the user clicked on the purchase button in order to purchase it.
@@ -130,18 +114,34 @@ The following function are used to fetch the required data from the data base an
   handle_collection= (e)=>{
     this.setState({collection_selected:e, filter_collection:true});
   }
-  handle_collection_noFiltered= () =>{
-    this.setState({filter_collection:false,both_flag:false});
+  handle_collection_noFiltered= () =>{////////must update
+    this.setState({
+      filter_collection:false,
+      both_flag:false,
+    collection_selected:[]});
   }
   handle_category= (e)=>{
     this.setState({category_selected:e,filter_category: true});
   }
   handle_category_noFiltered= () =>{
-    this.setState({filter_category:false,both_flag:false});
+    this.setState({
+      filter_category:false,
+      both_flag:false,
+    category_selected:[]});
   }
-  
-
-
+  async componentDidUpdate(){
+    if(this.state.filter_collection && this.state.filter_category){
+      try {
+        const response = await fetch(`http://localhost:8080/join?cat=${this.state.category_selected[0].category_category_id}&coll=${this.state.collection_selected[0].collection_collection_id}`);
+        const result = await response.json();
+        if (!this.state.both_flag && result.success) {
+          this.setState({ both: result.result,both_flag:true});
+        }
+      } catch (err) {
+        this.setState({ error: err });
+      } 
+    }
+  }
 
   async componentDidMount() {
     await this.getCollectionList();
@@ -149,9 +149,6 @@ The following function are used to fetch the required data from the data base an
     await this.getimage();
     await this.getCategoryList();
     await this.getOrder(); 
-  }
-  async componentWillUpdate() {
-    await this.join();
   }
 
   render() {
@@ -189,7 +186,7 @@ The following function are used to fetch the required data from the data base an
                 />
               )}
             />
-              
+              {console.log(this.state)}
               <Route
                 path="/admin/"
                 component={() => (
@@ -225,7 +222,9 @@ The following function are used to fetch the required data from the data base an
                     handle_collection_noFiltered={this.handle_collection_noFiltered}
                     handle_category={this.handle_category}
                     handle_category_noFiltered={this.handle_category_noFiltered}
-                    
+                    collection_selected={this.state.collection_selected}
+                    category_selected={this.state.category_selected}
+
                   />
                 )}
               /> 

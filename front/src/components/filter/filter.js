@@ -16,12 +16,14 @@ class searchBar extends React.Component {
     this.state = {
       product:[],
       collection:[],
-      category:[]
+      category:[],
+      title:""
     };
   }
-
-
+  
    select_collection=(event) =>{
+     event.preventDefault();
+    this.setState({title:"blah"});
     if(event.target.innerText=="All Collection"){
       this.props.handle_collection_noFiltered();
     }
@@ -37,6 +39,8 @@ class searchBar extends React.Component {
  }
 
   select_category=(event) =>{
+    event.preventDefault();
+    this.setState({title:event.target.innerText})
     if(event.target.innerText=="All Category"){
        this.props.handle_category_noFiltered();
     }
@@ -51,18 +55,38 @@ class searchBar extends React.Component {
     }
  } 
 
-  async componentDidMount() {
-    await this.setState({
+ collection_name=()=>{
+  let s=this.props.collection.filter(
+    obj => obj.collection_id==this.props.collection_selected[0].collection_collection_id
+  )
+  return s[0].collection_name;
+ }
+
+ category_name=()=>{
+  let s=this.props.category.filter(
+    obj => obj.category_id==this.props.category_selected[0].category_category_id
+  )
+  return s[0].category_name;
+ }
+
+   componentDidMount() {
+     this.setState({
       collection: this.props.collection,
       category: this.props.category ? this.props.category : [],
-      product:this.props.product
+      product:this.props.product,
+      title:"collection"
     });
+  }
+  handleEnter(e){
+    if(e.key=="Enter"){
+    console.log("eghjbj")
+    }
   }
 
   render() {
     return (
       <div className="filter">
-        <InputGroup class="filter_inputGroop" style={{ width: "500px" }}>
+        <InputGroup class="filter_inputGroop" style={{ width: "500px" }} onKeyPressCapture={e=>this.handleEnter(e)}>
           <FormControl
             class="filter_inputText"
             placeholder="type to Search"
@@ -70,14 +94,14 @@ class searchBar extends React.Component {
             aria-describedby="basic-addon2"
             variant="outline-secondary"
           />
-
+           {/* <Button variant="outline-secondary">Search</Button>  */}
           <DropdownButton
             as={InputGroup.Append}
             variant="outline-secondary"
-            title="Collection"
+            title={this.props.collection_selected.length==0?"Collection":this.collection_name()}
             id="input-group-dropdown-2"
           > 
-            <Dropdown.Item href="#" onClick={this.select_collection} value="AllCollection"> All Collection</Dropdown.Item>
+            <Dropdown.Item href="#" onClick={(e)=>this.select_collection(e)} value="AllCollection"> All Collection</Dropdown.Item>
             {this.state.collection.map((image, index) => (
               <Dropdown.Item href="#" onClick={this.select_collection} value={image}>{image.collection_name}</Dropdown.Item>
             ))}
@@ -85,7 +109,7 @@ class searchBar extends React.Component {
           <DropdownButton
             as={InputGroup.Append}
             variant="outline-secondary"
-            title="Category"
+            title={this.props.category_selected.length==0?"Category":this.category_name()}
             id="input-group-dropdown-2"
           >
             <Dropdown.Item href="#" onClick={this.select_category} value="AllCategory"> All Category</Dropdown.Item>
@@ -94,7 +118,7 @@ class searchBar extends React.Component {
             ))}
           </DropdownButton>
           <InputGroup.Append>
-            {/*   <Button variant="outline-secondary">Button</Button> */}
+              
           </InputGroup.Append>
         </InputGroup>
       </div>

@@ -25,14 +25,14 @@ export class modalWindow extends React.Component {
   }
   async componentDidMount(){
      this.setState({
-       category:this.props.category.filter(obj=> obj.category_id == this.props.product[0].category_category_id),
-       collection:this.props.collection.filter(obj=> obj.collection_id == this.props.product[0].collection_collection_id),
+       category:this.props.category.filter(obj=> obj.category_id == this.props.product.category_category_id),
+       collection:this.props.collection.filter(obj=> obj.collection_id == this.props.product.collection_collection_id),
     })
   }
   render() {
     return (
-      <div className="modalWindow">
-        <div className="modalWindow_container1">
+      <div className="modalWindow">{console.log("modal",this.props.product.product_id)}
+         <div className="modalWindow_container1">
           <div className="mainImgContainer">
             <img
               src={
@@ -55,15 +55,15 @@ export class modalWindow extends React.Component {
           </div>
         </div>
 
-        <div className="modalWindow_container2">
+         <div className="modalWindow_container2">
           <table>
             <tr>
               <th>Name : </th>
-              <td>{this.props.product[0].product_name}</td>
+              <td>{this.props.product.product_name}</td>
             </tr>
             <tr>
               <th>Description : </th>
-              <td>{this.props.product[0].product_description}</td>
+              <td>{this.props.product.product_description}</td>
             </tr>
             <tr>
               <th>Category : </th>
@@ -104,7 +104,7 @@ export class modalWindow extends React.Component {
                   : "modalWindow_price modalWindow_priceOff"
               }
             >
-              <strong>{this.props.product[0].product_price} LL</strong>
+              <strong>{this.props.product.product_price} LL</strong>
             </p>
           </InputGroup.Append>
           <InputGroup.Append class="modalWindow_purshase">
@@ -114,7 +114,7 @@ export class modalWindow extends React.Component {
               </NavLink>
             </Button>
           </InputGroup.Append>
-        </div>
+        </div> 
       </div>
     );
   }

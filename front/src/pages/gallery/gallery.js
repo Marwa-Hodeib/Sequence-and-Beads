@@ -42,6 +42,8 @@ class Gallery extends React.Component {
             handle_category_noFiltered={this.props.handle_category_noFiltered}
             product={this.props.product}
             initialproduct={this.props.initialproduct}
+            collection_selected={this.props.collection_selected}
+            category_selected={this.props.category_selected}
 
           />
         </div>
