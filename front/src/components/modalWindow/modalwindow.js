@@ -21,7 +21,7 @@ export class modalWindow extends React.Component {
     });
   };
   handleprops=()=>{
-    this.props.purchase(this.props.product[0].product_id, this.props.product[0].product_price);
+    this.props.purchase(this.props.product.product_id, this.props.product.product_price);
   }
   async componentDidMount(){
      this.setState({
